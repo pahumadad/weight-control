@@ -1,0 +1,32 @@
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }}</title>
+        {% else %}
+        <title>weight-control</title>
+        {% endif %}
+    </head>
+    <body>
+        <h1>Weight Control App</h1>
+        {% if g.user.is_authenticated %}
+            | <a>Hello {{ g.user.nickname }}</a>
+            | <a href="{{ url_for('index') }}">Home</a>
+            | <a href="{{ url_for('user', nickname=g.user.nickname) }}">Your Profile</a>
+            | <a href="{{ url_for('logout') }}">Sign Out</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Sign In</a>
+        {% endif %}
+        <hr>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
