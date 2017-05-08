@@ -1,32 +1,42 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
         {% if title %}
         <title>{{ title }}</title>
         {% else %}
         <title>weight-control</title>
         {% endif %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1>Weight Control App</h1>
-        {% if g.user.is_authenticated %}
-            | <a>Hello {{ g.user.nickname }}</a>
-            | <a href="{{ url_for('index') }}">Home</a>
-            | <a href="{{ url_for('user', nickname=g.user.nickname) }}">Your Profile</a>
-            | <a href="{{ url_for('logout') }}">Sign Out</a>
-        {% else %}
-            <a href="{{ url_for('login') }}">Sign In</a>
-        {% endif %}
-        <hr>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul>
-                    {% for message in messages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
-        {% block content %}
-        {% endblock %}
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="{{ url_for('index') }}">Weight Control App</a>
+                    </div>
+                    {% if g.user.is_authenticated %}
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url_for('index') }}">Home</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a>Hello {{ g.user.nickname }}!</a></li>
+                        <li><a href="{{ url_for('user', nickname=g.user.nickname) }}"><span class="glyphicon glyphicon-user"></span>&nbspProfile</a></li>
+                        <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span>&nbspSign Out</a></li>
+                    </ul>
+                    {% else %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span>&nbspSign In</a></li>
+                    </ul>
+                    {% endif %}
+                </div>
+            </nav>
+            {% block content %}
+            {% endblock %}
+        </div>
     </body>
 </html>

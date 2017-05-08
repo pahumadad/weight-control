@@ -3,54 +3,51 @@
 
 {% block content %}
     <h1>Edit Your Profile</h1>
+    {% include 'flash.html' %}
     <div class="well">
-        <form action="" method="post" name="edit">
+        <form class="form-horizontal" action="" method="post" name="edit">
             {{ form.hidden_tag() }}
-            <table>
-                <tr>
-                    <td>Your nickname</td>
-                    <td>:</td>
-                    <td>
-                        {{ form.nickname(size=24) }}
-                        {% for error in form.errors.nickname %}
-                        <br><span style="color: red">[{{ error }}]</span>
-                        {% endfor %}
-                    </td>
-                </tr>
-                <tr>
-                    <td>Your Name</td>
-                    <td>:</td>
-                    <td>
-                        {{ form.name(size=24) }}
-                        {% for error in form.errors.name %}
-                        <br><span style="color: red">[{{ error }}]</span>
-                        {% endfor %}
-                    </td>
-                </tr>
-                <tr>
-                    <td>Your Age</td>
-                    <td>:</td>
-                    <td>
-                        {{ form.age(size=24) }}
-                        {% for error in form.errors.age %}
-                        <br><span style="color: red">[{{ error }}]</span>
-                        {% endfor %}
-                    </td>
-                </tr>
-                <tr>
-                    <td>Your Height</td>
-                    <td>:</td>
-                    <td>
-                        {{ form.height(size=24) }}
-                        {% for error in form.errors.height %}
-                        <br><span style="color: red">[{{ error }}]</span>
-                        {% endfor %}
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="submit" value="Save Changes"></td>
-                </tr>
-            </table>
+            <div class="form-group{% if form.nickname.errors %} error{% endif %}">
+                <label class="control-label col-sm-2" for="nickname">Your nickname:</label>
+                <div class="col-sm-4">
+                    {{ form.nickname(maxlength=64, class="form-control", required=form.nickname.flags.required) }}
+                    {% for error in form.nickname.errors %}
+                        <span class="help-inline">[{{ error }}]</span><br>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-group{% if form.name.errors %} error{% endif %}">
+                <label class="control-label col-sm-2" for="name">Your name:</label>
+                <div class="col-sm-4">
+                    {{ form.name(maxlength=64, class="form-control") }}
+                    {% for error in form.name.errors %}
+                        <span class="help-inline">[{{ error }}]</span><br>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-group{% if form.age.errors %} error{% endif %}">
+                <label class="control-label col-sm-2" for="age">Your age:</label>
+                <div class="col-sm-4">
+                    {{ form.age(maxlength=64, class="form-control", type="number") }}
+                    {% for error in form.age.errors %}
+                        <span class="help-inline">[{{ error }}]</span><br>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-group{% if form.height.errors %} error{% endif %}">
+                <label class="control-label col-sm-2" for="height">Your height:</label>
+                <div class="col-sm-4">
+                    {{ form.height(maxlength=64, class="form-control", type="decimal") }}
+                    {% for error in form.height.errors %}
+                        <span class="help-inline">[{{ error }}]</span><br>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input class="btn btn-primary" type="submit" value="Save Changes">
+                </div>
+            </div>
         </form>
     </div>
 {% endblock %}

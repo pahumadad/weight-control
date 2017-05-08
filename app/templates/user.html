@@ -3,34 +3,29 @@
 
 {% block content %}
     <h1>Your Profile</h1>
+    {% include 'flash.html' %}
     <div class="well">
         <h2>{{ user.nickname }}</h2>
-        <table>
-            <tr>
-                <td>Name</td>
-                <td>:</td>
-                <td>{{ user.name }}</td>
-            </tr>
+        <br>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-6">
+                    <p>Name: <strong>{{ user.name }}</strong></p>
+                    {% if user.id == g.user.id %}
+                    <p>Email: <strong>{{ user.email }}</strong></p>
+                    {% endif %}
+                </div>
                 {% if user.id == g.user.id %}
-            <tr>
-                <td>Email</td>
-                <td>:</td>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <td>Age</td>
-                <td>:</td>
-                <td>{{ user.age }}</td>
-            </tr>
-            <tr>
-                <td>Height</td>
-                <td>:</td>
-                <td>{{ user.height }}</td>
-            </tr>
-            <tr>
-                <td><a href="{{ url_for('edit', nickname=user.nickname) }}">Edit your profile</a></td>
-            </tr>
+                <div class="col-sm-6">
+                    <p>Age: <strong>{{ user.age }}</strong></p>
+                    <p>Height: <strong>{{ user.height }}</strong></p>
+                </div>
                 {% endif %}
-        </table>
+            </div>
+        </div>
+        <br>
+        <a href="{{ url_for('edit', nickname=user.nickname) }}">
+            <button type="button" class="btn btn-primary">Edit Your Profile</button>
+        </a>
     </div>
 {% endblock %}
