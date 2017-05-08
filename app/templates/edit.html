@@ -43,8 +43,60 @@
                     {% endfor %}
                 </div>
             </div>
+            <hr class="col-sm-offset-3 col-sm-6">
+            <div class="control-group">
+                <div class="col-sm-offset-1 col-sm-3">
+                    <label class="checkbox" for="weight">
+                        {{ form.weight }} Weight
+                    </label>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="col-sm-offset-1 col-sm-3">
+                    <label class="checkbox" for="bmi">
+                        {{ form.bmi }} BMI
+                    </label>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="col-sm-offset-1 col-sm-3">
+                    <label class="checkbox" for="fat">
+                        {{ form.fat }} Fat
+                    </label>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="col-sm-offset-1 col-sm-3">
+                    <label class="checkbox" for="muscle">
+                        {{ form.muscle }} Muscle
+                    </label>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="col-sm-offset-1 col-sm-3">
+                    <label class="checkbox" for="viceral">
+                        {{ form.viceral }} Viceral Fat
+                    </label>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="col-sm-offset-1 col-sm-3">
+                    <label class="checkbox" for="bmr">
+                        {{ form.bmr }} Basal Metabolic Rate
+                    </label>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="col-sm-offset-1 col-sm-3">
+                    <label class="checkbox" for="bodyage">
+                        {{ form.bodyage }} Body Age
+                    </label>
+                </div>
+            </div>
+            <hr class="col-sm-offset-3 col-sm-6">
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
+                <div class="col-sm-offset-2 col-sm-4">
+                    <a href="{{ url_for('user', nickname=user.nickname) }}" name="cancel" class="btn btn-default">Cancel</a>&nbsp&nbsp&nbsp
                     <input class="btn btn-primary" type="submit" value="Save Changes">
                 </div>
             </div>

@@ -103,7 +103,14 @@ def edit(nickname):
         user.nickname = form.nickname.data
         user.name = form.name.data
         user.age = form.age.data
-        user.height = form.height.data
+        user.height  = form.height.data
+        user.weight  = form.weight.data
+        user.bmi     = form.bmi.data
+        user.fat     = form.fat.data
+        user.muscle  = form.muscle.data
+        user.viceral = form.viceral.data
+        user.bmr     = form.bmr.data
+        user.bodyage = form.bodyage.data
         db.session.add(user)
         db.session.commit()
         flash('Your changes have been saved.')
@@ -113,6 +120,13 @@ def edit(nickname):
         form.name.data     = user.name
         form.age.data      = user.age
         form.height.data   = user.height
+        form.weight.data   = user.weight
+        form.bmi.data      = user.bmi
+        form.fat.data      = user.fat
+        form.muscle.data   = user.muscle
+        form.viceral.data  = user.viceral
+        form.bmr.data      = user.bmr
+        form.bodyage.data  = user.bodyage
     return render_template('edit.html',
                             title="Edit",
                             user=user,

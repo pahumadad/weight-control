@@ -23,11 +23,21 @@
                 {% endif %}
             </div>
         </div>
+        <hr>
+        <h3>Measurements</h3>
         <br>
+        <div class="row">
+            <div class="col-sm-12">
+                {% for measurement in user.get_measurements() %}
+                    <div class="col-sm-4">
+                        <p>{{ measurement }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <hr>
         <a href="{{ url_for('edit', nickname=user.nickname) }}">
             <button type="button" class="btn btn-primary">Edit Your Profile</button>
         </a>
-        <hr>
-        <h2>Measurements</h2>
     </div>
 {% endblock %}

@@ -1,15 +1,23 @@
 from app import db
 from flask_login import UserMixin
+from config import MEASUREMENTS
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
+    id       = db.Column(db.Integer, primary_key=True)
     nickname = db.Column(db.String(64), index=True, unique=True)
-    name = db.Column(db.String(64), index=True)
-    email = db.Column(db.String(64), index=True, unique=True)
-    date = db.Column(db.DateTime)
-    height = db.Column(db.Float(Precision=2))
-    age = db.Column(db.Integer)
+    name     = db.Column(db.String(64), index=True)
+    email    = db.Column(db.String(64), index=True, unique=True)
+    date     = db.Column(db.DateTime)
+    height   = db.Column(db.Float(Precision=2))
+    age      = db.Column(db.Integer)
+    weight   = db.Column(db.Boolean, default=False)
+    bmi      = db.Column(db.Boolean, default=False)
+    fat      = db.Column(db.Boolean, default=False)
+    muscle   = db.Column(db.Boolean, default=False)
+    viceral  = db.Column(db.Boolean, default=False)
+    bmr      = db.Column(db.Boolean, default=False)
+    bodyage  = db.Column(db.Boolean, default=False)
 
     @property
     def is_authenticated(self):
@@ -43,3 +51,26 @@ class User(UserMixin, db.Model):
                 break
             version += 1
         return new_nickname
+
+    def __getitem__(self, index):
+        if index == 0:
+            return self.weight
+        if index == 1:
+            return self.bmi
+        if index == 2:
+            return self.fat
+        if index == 3:
+            return self.muscle
+        if index == 4:
+            return self.viceral
+        if index == 5:
+            return self.bmr
+        if index == 6:
+            return self.bodyage
+
+    def get_measurements(self):
+        measures = []
+        for x, y, z in MEASUREMENTS:
+            if self[x] is True:
+                measures.append(z)
+        return measures
