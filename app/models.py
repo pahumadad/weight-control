@@ -1,5 +1,6 @@
 from app import db
 from flask_login import UserMixin
+from collections import OrderedDict
 from config import MEASUREMENTS
 
 class User(UserMixin, db.Model):
@@ -73,4 +74,11 @@ class User(UserMixin, db.Model):
         for x, y, z in MEASUREMENTS:
             if self[x] is True:
                 measures.append(z)
+        return measures
+
+    def get_measurements_dict(self):
+        measures = OrderedDict()
+        for x, y, z in MEASUREMENTS:
+            if self[x] is True:
+                measures.update({y: z})
         return measures

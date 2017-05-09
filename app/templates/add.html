@@ -1,0 +1,32 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Add a New Control</h1>
+    {% include 'flash.html' %}
+    <div class="well">
+        <form class="form-horizontal" action="" method="post" name="add">
+            {{ form.hidden_tag() }}
+            <div class="form-group{% if form.date.errors %} error{% endif %}">
+                <label class="control-label col-sm-2" for="date">Date:</label>
+                <div class="col-sm-4">
+                    {{ form.date(maxlength=64, class="form-control", type="date") }}
+                    {% for error in form.date.errors %}
+                        <span class="help-inline">[{{ error }}]</span><br>
+                    {% endfor %}
+                </div>
+            </div>
+            {% for m in form.measurements %}
+                <div class="form-group{% if m.form.value.errors %} error{% endif %}">
+                    <label class="control-label col-sm-2" for="date">{{ m.form.value.label }}:</label>
+                    <div class="col-sm-4">
+                        {{ m.form.value(maxlength=64, class="form-control", type="decimal") }}
+                        {% for error in m.form.value.errors %}
+                            <span class="help-inline">[{{ error }}]</span><br>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </form>
+    </div>
+{% endblock %}

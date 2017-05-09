@@ -1,20 +1,21 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, DecimalField, BooleanField
+from wtforms import StringField, IntegerField, DecimalField, BooleanField, DateField, FormField, FieldList
 from wtforms.validators import DataRequired
 from app.models import User
+from config import MEASUREMENTS
 
 class EditForm(FlaskForm):
     nickname = StringField('nickname', validators=[DataRequired()])
     name     = StringField('name', validators=[DataRequired()])
     age      = IntegerField('age')
-    height   = DecimalField('heighti', places=2)
-    weight   = BooleanField('Weight')
-    bmi      = BooleanField('BMI')
-    fat      = BooleanField('Fat')
-    muscle   = BooleanField('Muscle')
-    viceral  = BooleanField('Viceral Fat')
-    bmr      = BooleanField('Basal Metabolic Rate')
-    bodyage  = BooleanField('Body Age')
+    height   = DecimalField('height', places=2)
+    weight   = BooleanField('weight')
+    bmi      = BooleanField('bmi')
+    fat      = BooleanField('fat')
+    muscle   = BooleanField('muscle')
+    viceral  = BooleanField('viceral')
+    bmr      = BooleanField('bmr')
+    bodyage  = BooleanField('bodyage')
 
 
     def __init__(self, original_nickname, *args, **kwargs):
@@ -31,3 +32,12 @@ class EditForm(FlaskForm):
             self.nickname.errors.append('This nickname is already in use. Please chose another one.')
             return False
         return True
+
+
+class MeasurementEntry(FlaskForm):
+    value = DecimalField(places=1)
+
+
+class NewControlForm(FlaskForm):
+    date = DateField('date', format='%Y-%m-%d')
+    measurements = FieldList(FormField(MeasurementEntry))

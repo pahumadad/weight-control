@@ -4,7 +4,7 @@ from datetime import datetime
 from app import app, db, lm
 from .models import User
 from .oauth import OAuthSignIn
-from .forms import EditForm
+from .forms import EditForm, NewControlForm
 
 @app.route('/')
 @app.route('/index')
@@ -87,7 +87,7 @@ def user(nickname):
         flash('User %s not found.' % nickname)
         return redirect(url_for('index'))
     return render_template('user.html',
-                            title="Profile",
+                            title="User Profile",
                             user=user)
 
 
@@ -101,16 +101,16 @@ def edit(nickname):
     form = EditForm(user.nickname)
     if form.validate_on_submit():
         user.nickname = form.nickname.data
-        user.name = form.name.data
-        user.age = form.age.data
-        user.height  = form.height.data
-        user.weight  = form.weight.data
-        user.bmi     = form.bmi.data
-        user.fat     = form.fat.data
-        user.muscle  = form.muscle.data
-        user.viceral = form.viceral.data
-        user.bmr     = form.bmr.data
-        user.bodyage = form.bodyage.data
+        user.name     = form.name.data
+        user.age      = form.age.data
+        user.height   = form.height.data
+        user.weight   = form.weight.data
+        user.bmi      = form.bmi.data
+        user.fat      = form.fat.data
+        user.muscle   = form.muscle.data
+        user.viceral  = form.viceral.data
+        user.bmr      = form.bmr.data
+        user.bodyage  = form.bodyage.data
         db.session.add(user)
         db.session.commit()
         flash('Your changes have been saved.')
@@ -128,6 +128,31 @@ def edit(nickname):
         form.bmr.data      = user.bmr
         form.bodyage.data  = user.bodyage
     return render_template('edit.html',
-                            title="Edit",
+                            title="Edit User Profile",
                             user=user,
+                            form=form)
+
+
+@app.route('/<nickname>/add', methods=['GET', 'POST'])
+@login_required
+def add(nickname):
+    if g.user.nickname != nickname:
+        flash('You can not add someone else controls')
+        return redirect(url_for('user', nickname=g.user.nickname))
+    user = User.query.filter_by(nickname=nickname).first()
+    user_measurements = user.get_measurements_dict()
+    form = NewControlForm(measurements=user_measurements)
+    i = 0
+    for m in form.measurements:
+        m.form.value.label = list(user_measurements.values())[i]
+        i += 1
+    if i == 0:
+        flash('You have to select your measurements')
+        return redirect(url_for('user', nickname=user.nickname))
+    if form.validate_on_submit():
+        pass
+    else:
+        form.date.data = datetime.utcnow()
+    return render_template('add.html',
+                            title="Add New Control",
                             form=form)
