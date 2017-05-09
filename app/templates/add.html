@@ -10,7 +10,7 @@
             <div class="form-group{% if form.date.errors %} error{% endif %}">
                 <label class="control-label col-sm-2" for="date">Date:</label>
                 <div class="col-sm-4">
-                    {{ form.date(maxlength=64, class="form-control", type="date") }}
+                    {{ form.date(maxlength=64, class="form-control", type="date", required=form.date.flags.required) }}
                     {% for error in form.date.errors %}
                         <span class="help-inline">[{{ error }}]</span><br>
                     {% endfor %}
@@ -20,13 +20,19 @@
                 <div class="form-group{% if m.form.value.errors %} error{% endif %}">
                     <label class="control-label col-sm-2" for="date">{{ m.form.value.label }}:</label>
                     <div class="col-sm-4">
-                        {{ m.form.value(maxlength=64, class="form-control", type="decimal") }}
+                        {{ m.form.value(maxlength=64, class="form-control", type="decimal", required=m.form.value.flags.required) }}
                         {% for error in m.form.value.errors %}
                             <span class="help-inline">[{{ error }}]</span><br>
                         {% endfor %}
                     </div>
                 </div>
             {% endfor %}
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-4">
+                    <a href="{{ url_for('index') }}" name="cancel" class="btn btn-default">Cancel</a>&nbsp&nbsp&nbsp
+                    <input class="btn btn-primary" type="submit" value="Add New Control">
+                </div>
+            </div>
         </form>
     </div>
 {% endblock %}

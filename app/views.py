@@ -2,9 +2,10 @@ from flask import render_template, flash, redirect, url_for, session, request, g
 from flask_login import login_user, logout_user, current_user, login_required
 from datetime import datetime
 from app import app, db, lm
-from .models import User
+from .models import User, Control
 from .oauth import OAuthSignIn
 from .forms import EditForm, NewControlForm
+from config import MEASUREMENTS
 
 @app.route('/')
 @app.route('/index')
@@ -113,7 +114,7 @@ def edit(nickname):
         user.bodyage  = form.bodyage.data
         db.session.add(user)
         db.session.commit()
-        flash('Your changes have been saved.')
+        flash('Your changes have been saved')
         return redirect(url_for('user', nickname=user.nickname))
     else:
         form.nickname.data = user.nickname
@@ -133,12 +134,12 @@ def edit(nickname):
                             form=form)
 
 
-@app.route('/<nickname>/add', methods=['GET', 'POST'])
+@app.route('/user/<nickname>/add', methods=['GET', 'POST'])
 @login_required
 def add(nickname):
     if g.user.nickname != nickname:
         flash('You can not add someone else controls')
-        return redirect(url_for('user', nickname=g.user.nickname))
+        return redirect(url_for('controls', nickname=g.user.nickname))
     user = User.query.filter_by(nickname=nickname).first()
     user_measurements = user.get_measurements_dict()
     form = NewControlForm(measurements=user_measurements)
@@ -150,9 +151,30 @@ def add(nickname):
         flash('You have to select your measurements')
         return redirect(url_for('user', nickname=user.nickname))
     if form.validate_on_submit():
-        pass
+        control = Control(user_id=user.id, date=form.date.data)
+        for m in form.measurements:
+            for x, y, z in MEASUREMENTS:
+                if m.form.value.label == z:
+                    control.set_attribute(y, m.form.value.data)
+        db.session.add(control)
+        db.session.commit()
+        flash('Your control has been added')
+        return redirect(url_for('index'))
     else:
         form.date.data = datetime.utcnow()
     return render_template('add.html',
                             title="Add New Control",
+                            user=user,
                             form=form)
+
+
+@app.route('/user/<nickname>/controls')
+@login_required
+def controls(nickname):
+    if g.user.nickname != nickname:
+        flash('You can see someone else controls')
+        return redirect(url_for('controls', nickname=g.user.nickname))
+    user = User.query.filter_by(nickname=nickname).first()
+    return render_template('controls.html',
+                            title="User's Controls List",
+                            user=user)

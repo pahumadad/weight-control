@@ -2,7 +2,6 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, DecimalField, BooleanField, DateField, FormField, FieldList
 from wtforms.validators import DataRequired
 from app.models import User
-from config import MEASUREMENTS
 
 class EditForm(FlaskForm):
     nickname = StringField('nickname', validators=[DataRequired()])
@@ -35,9 +34,12 @@ class EditForm(FlaskForm):
 
 
 class MeasurementEntry(FlaskForm):
-    value = DecimalField(places=1)
+    value = DecimalField(validators=[DataRequired()])
+
+    def __init__(self, csrf_enabled=False, *args, **kwargs):
+        super(MeasurementEntry, self).__init__(csrf_enabled=csrf_enabled, *args, **kwargs)
 
 
 class NewControlForm(FlaskForm):
-    date = DateField('date', format='%Y-%m-%d')
+    date = DateField('date', validators=[DataRequired()])
     measurements = FieldList(FormField(MeasurementEntry))
