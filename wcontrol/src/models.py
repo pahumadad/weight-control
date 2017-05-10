@@ -2,7 +2,7 @@ from wcontrol.src.main import app
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from collections import OrderedDict
-from config import MEASUREMENTS
+from wcontrol.conf.config import MEASUREMENTS
 
 db = SQLAlchemy(app)
 
