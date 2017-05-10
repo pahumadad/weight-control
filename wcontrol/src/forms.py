@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, DecimalField, BooleanField, DateField, FormField, FieldList
 from wtforms.validators import DataRequired
-from app.models import User
+from wcontrol.src.models import User
+
 
 class EditForm(FlaskForm):
     nickname = StringField('nickname', validators=[DataRequired()])
@@ -27,8 +28,9 @@ class EditForm(FlaskForm):
         if self.nickname.data == self.original_nickname:
             return True
         user = User.query.filter_by(nickname=self.nickname.data).first()
-        if user != None:
-            self.nickname.errors.append('This nickname is already in use. Please chose another one.')
+        if user:
+            msg = 'This nickname is already in use. Please chose another one.'
+            self.nickname.errors.append(msg)
             return False
         return True
 

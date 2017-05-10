@@ -1,9 +1,14 @@
-from app import db
+from wcontrol.src.main import app
+from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from collections import OrderedDict
 from config import MEASUREMENTS
 
+db = SQLAlchemy(app)
+
+
 class User(UserMixin, db.Model):
+
     __tablename__ = 'users'
     id       = db.Column(db.Integer, primary_key=True)
     nickname = db.Column(db.String(64), index=True, unique=True)
@@ -37,10 +42,7 @@ class User(UserMixin, db.Model):
         return '<User %r>' % (self.nickname)
 
     def get_id(self):
-        try:
-            return unicode(self.id) # python2
-        except NameError:
-            return str(self.id) # python3
+        return str(self.id)
 
     @staticmethod
     def make_unique_nickname(nickname):

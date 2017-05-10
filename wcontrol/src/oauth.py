@@ -1,6 +1,8 @@
 from flask import url_for, current_app, redirect, request
 from rauth import OAuth2Service
-import json, urllib3
+import json
+import urllib3
+
 
 class OAuthSignIn(object):
     providers = None
@@ -18,23 +20,27 @@ class OAuthSignIn(object):
         pass
 
     def get_callback_url(self):
-        return url_for('oauth_callback', provider=self.provider_name, _external=True)
+        return url_for('oauth_callback',
+                       provider=self.provider_name,
+                       _external=True)
 
     @classmethod
     def get_provider(self, provider_name):
         if self.providers is None:
-            self.providers={}
+            self.providers = {}
             for provider_class in self.__subclasses__():
                 provider = provider_class()
                 self.providers[provider.provider_name] = provider
         return self.providers[provider_name]
+
 
 class GoogleSignIn(OAuthSignIn):
     def __init__(self):
         super(GoogleSignIn, self).__init__('google')
         urllib3.disable_warnings()
         http = urllib3.PoolManager()
-        googleinfo = http.request('GET', 'https://accounts.google.com/.well-known/openid-configuration')
+        url = 'https://accounts.google.com/.well-known/openid-configuration'
+        googleinfo = http.request('GET', url)
         google_params = json.loads(googleinfo.data.decode('utf-8'))
         self.service = OAuth2Service(
             name='google',
@@ -56,15 +62,16 @@ class GoogleSignIn(OAuthSignIn):
         if 'code' not in request.args:
             return None, None, None
 
-        data={'code': request.args['code'],
-              'grant_type': 'authorization_code',
-              'redirect_uri': self.get_callback_url()
-             }
+        data = {'code': request.args['code'],
+                'grant_type': 'authorization_code',
+                'redirect_uri': self.get_callback_url()}
+
         oauth_session = self.service.get_auth_session(
                 data=data, decoder=oauth_decode
         )
         me = oauth_session.get('').json()
-        return (None, me['name'], me['email']) # (nickname, name, email)
+        # (nickname, name, email)
+        return (None, me['name'], me['email'])
 
 
 class FacebookSignIn(OAuthSignIn):
@@ -90,15 +97,16 @@ class FacebookSignIn(OAuthSignIn):
         if 'code' not in request.args:
             return None, None, None
 
-        data={'code': request.args['code'],
-              'grant_type': 'authorization_code',
-              'redirect_uri': self.get_callback_url()
-             }
+        data = {'code': request.args['code'],
+                'grant_type': 'authorization_code',
+                'redirect_uri': self.get_callback_url()}
+
         oauth_session = self.service.get_auth_session(
                 data=data, decoder=oauth_decode
         )
         me = oauth_session.get('me?fields=email').json()
-        return (None, None, me['email']) # (nickname, name, email)
+        # (nickname, name, email)
+        return (None, None, me['email'])
 
 
 def oauth_decode(data):
