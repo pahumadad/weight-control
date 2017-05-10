@@ -175,7 +175,44 @@ def controls(nickname):
                            user=user)
 
 
-def control_remove(id):
+def control_edit(nickname, id):
+    if g.user.nickname != nickname:
+        flash('You can not edit someone else controls')
+        return redirect(url_for('controls', nickname=g.user.nickname))
+    user = User.query.filter_by(nickname=nickname).first()
+    control = Control.query.filter_by(id=id).first()
+    if not control:
+        flash('Control does not exist')
+        return redirect(url_for('controls', nickname=g.user.nickname))
+    user_measurements = user.get_measurements_dict()
+    form = NewControlForm(measurements=user_measurements)
+    i = 0
+    for m in form.measurements:
+        m.form.value.label = list(user_measurements.values())[i]
+        i += 1
+    if i == 0:
+        flash('You have to select your measurements')
+        return redirect(url_for('user', nickname=user.nickname))
+    if form.validate_on_submit():
+        for m in form.measurements:
+            for x, y, z in MEASUREMENTS:
+                if m.form.value.label == z:
+                    control.set_attribute(y, m.form.value.data)
+        db.session.add(control)
+        db.session.commit()
+        flash('Your control has been edited')
+        return redirect(url_for('controls', nickname=g.user.nickname))
+    else:
+        form.date.data = control.date
+        for m in form.measurements:
+            for x, y, z in MEASUREMENTS:
+                if m.form.value.label == z:
+                    m.form.value.data = control[x][1]
+    return render_template('edit_control.html',
+                           title="Edit Control",
+                           form=form)
+
+
 def control_remove(nickname, id):
     if g.user.nickname != nickname:
         flash('You can not remove someone else controls')
