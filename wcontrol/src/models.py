@@ -28,10 +28,7 @@ class User(UserMixin, db.Model):
         return '<User %r>' % (self.nickname)
 
     def get_id(self):
-        try:
-            return unicode(self.id)
-        except NameError:
-            return str(self.id)
+        return str(self.id)
 
     @staticmethod
     def make_unique_nickname(nickname):
