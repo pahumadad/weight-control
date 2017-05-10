@@ -57,6 +57,18 @@ def controls(nickname):
     return view.controls(nickname)
 
 
+@app.route('/user/<nickname>/controls/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def control_edit(nickname, id):
+    return view.control_edit(nickname, id)
+
+
+@app.route('/user/<nickname>/controls/remove/<int:id>')
+@login_required
+def control_remove(nickname, id):
+    return view.control_remove(nickname, id)
+
+
 if __name__ == "__main__":
     if len(sys.argv):
         if sys.argv[1] == "-c" or sys.argv[1] == "--creatredb":

@@ -3,8 +3,13 @@
     {% for i in user.get_measurements_index() %}
         <td>{{ controls[i][1] }}</td>
     {% endfor %}
-    <td style="width:60px">
-        <a><span class="glyphicon glyphicon-pencil" title="edit"></span></a>&nbsp
-        <a><span class="glyphicon glyphicon-remove" title="remove"></span></a>
+    <td style="width:70px">
+        <a href="{{ url_for('control_edit', nickname=g.user.nickname, id=controls.id) }}">
+            <span class="glyphicon glyphicon-pencil" title="Edit control"></span>
+        </a>
+        &nbsp;
+        <a href="{{ url_for('control_remove', nickname=g.user.nickname, id=controls.id) }}">
+            <span class="glyphicon glyphicon-remove" title="Remove Control"></span>
+        </a>
     </td>
 </tr>
