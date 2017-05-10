@@ -1,10 +1,17 @@
-from flask import render_template, flash, redirect, url_for, session, request, g
+from flask import Flask, render_template, flash, redirect, url_for, g
+from flask_login import LoginManager
 from flask_login import login_user, logout_user, current_user, login_required
+from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from app import app, db, lm
 from .models import User
 from .oauth import OAuthSignIn
 from .forms import EditForm
+
+app = Flask(__name__)
+app.config.from_object("config")
+db = SQLAlchemy(app)
+lm = LoginManager(app)
+
 
 @app.route('/')
 @app.route('/index')
@@ -15,12 +22,14 @@ def index():
                            title="Home",
                            user=user)
 
+
 @app.route('/authorize/<provider>')
 def oauth_authorize(provider):
     if not current_user.is_anonymous:
         return redirect(url_for('index'))
     oauth = OAuthSignIn.get_provider(provider)
     return oauth.authorize()
+
 
 @app.route('/callback/<provider>')
 def oauth_callback(provider):
