@@ -19,13 +19,13 @@ Then, you have to install flask and extensions:
 Now, you have to create the environment variables with the absolute path to the `api.py` and the config file.
 
 ```
-export FLASK_APP=$(pwd)/wcontrol/src/api.py
+export FLASK_APP=$(pwd)/wcontrol/src/main.py
 export WCONTROL_CONF=wcontrol.conf.config
 ```
 
 To create the database you have to run:
 
-`$ python -m wcontrol.src.api -c`
+`$ python -m wcontrol.src.main -c`
 
 
 Authentication

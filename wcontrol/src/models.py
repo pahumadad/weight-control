@@ -1,4 +1,4 @@
-from wcontrol.src.main import app
+from wcontrol.src.app import app
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from collections import OrderedDict
