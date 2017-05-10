@@ -1,6 +1,8 @@
 from flask_login import login_required
 from wcontrol.src.main import app
+from wcontrol.src.models import db
 import wcontrol.src.views as view
+import sys
 
 
 @app.route('/')
@@ -41,3 +43,9 @@ def user(nickname):
 @login_required
 def edit(nickname):
     return view.edit(nickname)
+
+
+if __name__ == "__main__":
+    if len(sys.argv):
+        if sys.argv[1] == "-c" or sys.argv[1] == "--creatredb":
+            db.create_all()
