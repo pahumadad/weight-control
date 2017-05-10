@@ -1,6 +1,7 @@
 from app import db
 from flask_login import UserMixin
 
+
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -28,9 +29,9 @@ class User(UserMixin, db.Model):
 
     def get_id(self):
         try:
-            return unicode(self.id) # python2
+            return unicode(self.id)
         except NameError:
-            return str(self.id) # python3
+            return str(self.id)
 
     @staticmethod
     def make_unique_nickname(nickname):
