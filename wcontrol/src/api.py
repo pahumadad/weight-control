@@ -45,6 +45,18 @@ def edit(nickname):
     return view.edit(nickname)
 
 
+@app.route('/user/<nickname>/add', methods=['GET', 'POST'])
+@login_required
+def add(nickname):
+    return view.add(nickname)
+
+
+@app.route('/user/<nickname>/controls')
+@login_required
+def controls(nickname):
+    return view.controls(nickname)
+
+
 if __name__ == "__main__":
     if len(sys.argv):
         if sys.argv[1] == "-c" or sys.argv[1] == "--creatredb":

@@ -133,8 +133,6 @@ def edit(nickname):
                             form=form)
 
 
-@app.route('/user/<nickname>/add', methods=['GET', 'POST'])
-@login_required
 def add(nickname):
     if g.user.nickname != nickname:
         flash('You can not add someone else controls')
@@ -167,8 +165,6 @@ def add(nickname):
                             form=form)
 
 
-@app.route('/user/<nickname>/controls')
-@login_required
 def controls(nickname):
     if g.user.nickname != nickname:
         flash('You can see someone else controls')
