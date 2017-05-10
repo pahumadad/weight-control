@@ -1,5 +1,6 @@
 import os
 
+# TODO: improve DB path selection
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 # sqlalchemy database config
