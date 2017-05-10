@@ -176,6 +176,10 @@ def controls(nickname):
 
 
 def control_remove(id):
+def control_remove(nickname, id):
+    if g.user.nickname != nickname:
+        flash('You can not remove someone else controls')
+        return redirect(url_for('controls', nickname=g.user.nickname))
     control = Control.query.filter_by(id=id).first()
     if not control:
         flash('Control does not exist')

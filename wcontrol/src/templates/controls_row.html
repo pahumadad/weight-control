@@ -5,6 +5,8 @@
     {% endfor %}
     <td style="width:60px">
         <a<span class="glyphicon glyphicon-pencil" title="edit"></span></a>&nbsp;
-        <a href="{{ url_for('control_remove', id=controls.id) }}"><span class="glyphicon glyphicon-remove" title="remove"></span></a>
+        <a href="{{ url_for('control_remove', nickname=g.user.nickname, id=controls.id) }}">
+            <span class="glyphicon glyphicon-remove" title="Remove Control"></span>
+        </a>
     </td>
 </tr>
