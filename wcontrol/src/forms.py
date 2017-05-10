@@ -44,5 +44,5 @@ class MeasurementEntry(FlaskForm):
 
 
 class NewControlForm(FlaskForm):
-    date = DateField('date', validators=[DataRequired()])
+    date = DateField('date')
     measurements = FieldList(FormField(MeasurementEntry))
