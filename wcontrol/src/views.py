@@ -8,9 +8,6 @@ from wcontrol.src.oauth import OAuthSignIn
 from wcontrol.src.forms import EditForm
 
 
-app = Flask(__name__)
-app.config.from_object("config")
-db = SQLAlchemy(app)
 lm = LoginManager(app)
 
 

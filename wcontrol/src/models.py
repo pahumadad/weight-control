@@ -2,8 +2,11 @@ from wcontrol.src.main import app
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 
+db = SQLAlchemy(app)
+
 
 class User(UserMixin, db.Model):
+
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     nickname = db.Column(db.String(64), index=True, unique=True)
