@@ -89,8 +89,8 @@ def user(nickname):
         flash('User %s not found.' % nickname)
         return redirect(url_for('index'))
     return render_template('user.html',
-                            title="User Profile",
-                            user=user)
+                           title="User Profile",
+                           user=user)
 
 
 def edit(nickname):
@@ -101,36 +101,36 @@ def edit(nickname):
     form = EditForm(user.nickname)
     if form.validate_on_submit():
         user.nickname = form.nickname.data
-        user.name     = form.name.data
-        user.age      = form.age.data
-        user.height   = form.height.data
-        user.weight   = form.weight.data
-        user.bmi      = form.bmi.data
-        user.fat      = form.fat.data
-        user.muscle   = form.muscle.data
-        user.viceral  = form.viceral.data
-        user.bmr      = form.bmr.data
-        user.bodyage  = form.bodyage.data
+        user.name = form.name.data
+        user.age = form.age.data
+        user.height = form.height.data
+        user.weight = form.weight.data
+        user.bmi = form.bmi.data
+        user.fat = form.fat.data
+        user.muscle = form.muscle.data
+        user.viceral = form.viceral.data
+        user.bmr = form.bmr.data
+        user.bodyage = form.bodyage.data
         db.session.add(user)
         db.session.commit()
         flash('Your changes have been saved')
         return redirect(url_for('user', nickname=user.nickname))
     else:
         form.nickname.data = user.nickname
-        form.name.data     = user.name
-        form.age.data      = user.age
-        form.height.data   = user.height
-        form.weight.data   = user.weight
-        form.bmi.data      = user.bmi
-        form.fat.data      = user.fat
-        form.muscle.data   = user.muscle
-        form.viceral.data  = user.viceral
-        form.bmr.data      = user.bmr
-        form.bodyage.data  = user.bodyage
+        form.name.data = user.name
+        form.age.data = user.age
+        form.height.data = user.height
+        form.weight.data = user.weight
+        form.bmi.data = user.bmi
+        form.fat.data = user.fat
+        form.muscle.data = user.muscle
+        form.viceral.data = user.viceral
+        form.bmr.data = user.bmr
+        form.bodyage.data = user.bodyage
     return render_template('edit.html',
-                            title="Edit User Profile",
-                            user=user,
-                            form=form)
+                           title="Edit User Profile",
+                           user=user,
+                           form=form)
 
 
 def add(nickname):
@@ -160,9 +160,9 @@ def add(nickname):
     else:
         form.date.data = datetime.utcnow()
     return render_template('add.html',
-                            title="Add New Control",
-                            user=user,
-                            form=form)
+                           title="Add New Control",
+                           user=user,
+                           form=form)
 
 
 def controls(nickname):
@@ -171,6 +171,5 @@ def controls(nickname):
         return redirect(url_for('controls', nickname=g.user.nickname))
     user = User.query.filter_by(nickname=nickname).first()
     return render_template('controls.html',
-                            title="User's Controls List",
-                            user=user)
-
+                           title="User's Controls List",
+                           user=user)

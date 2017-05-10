@@ -1,22 +1,22 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, DecimalField, BooleanField, DateField, FormField, FieldList
+from wtforms import StringField, IntegerField, DecimalField, BooleanField,\
+                    DateField, FormField, FieldList
 from wtforms.validators import DataRequired
 from wcontrol.src.models import User
 
 
 class EditForm(FlaskForm):
     nickname = StringField('nickname', validators=[DataRequired()])
-    name     = StringField('name', validators=[DataRequired()])
-    age      = IntegerField('age')
-    height   = DecimalField('height', places=2)
-    weight   = BooleanField('weight')
-    bmi      = BooleanField('bmi')
-    fat      = BooleanField('fat')
-    muscle   = BooleanField('muscle')
-    viceral  = BooleanField('viceral')
-    bmr      = BooleanField('bmr')
-    bodyage  = BooleanField('bodyage')
-
+    name = StringField('name', validators=[DataRequired()])
+    age = IntegerField('age')
+    height = DecimalField('height', places=2)
+    weight = BooleanField('weight')
+    bmi = BooleanField('bmi')
+    fat = BooleanField('fat')
+    muscle = BooleanField('muscle')
+    viceral = BooleanField('viceral')
+    bmr = BooleanField('bmr')
+    bodyage = BooleanField('bodyage')
 
     def __init__(self, original_nickname, *args, **kwargs):
         FlaskForm.__init__(self, *args, **kwargs)
@@ -39,7 +39,8 @@ class MeasurementEntry(FlaskForm):
     value = DecimalField(validators=[DataRequired()])
 
     def __init__(self, csrf_enabled=False, *args, **kwargs):
-        super(MeasurementEntry, self).__init__(csrf_enabled=csrf_enabled, *args, **kwargs)
+        super(MeasurementEntry, self).__init__(csrf_enabled=csrf_enabled,
+                                               *args, **kwargs)
 
 
 class NewControlForm(FlaskForm):

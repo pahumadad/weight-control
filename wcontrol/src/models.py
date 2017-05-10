@@ -8,22 +8,21 @@ db = SQLAlchemy(app)
 
 
 class User(UserMixin, db.Model):
-
     __tablename__ = 'users'
-    id       = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     nickname = db.Column(db.String(64), index=True, unique=True)
-    name     = db.Column(db.String(64), index=True)
-    email    = db.Column(db.String(64), index=True, unique=True)
-    date     = db.Column(db.DateTime)
-    height   = db.Column(db.Float(Precision=2))
-    age      = db.Column(db.Integer)
-    weight   = db.Column(db.Boolean, default=False)
-    bmi      = db.Column(db.Boolean, default=False)
-    fat      = db.Column(db.Boolean, default=False)
-    muscle   = db.Column(db.Boolean, default=False)
-    viceral  = db.Column(db.Boolean, default=False)
-    bmr      = db.Column(db.Boolean, default=False)
-    bodyage  = db.Column(db.Boolean, default=False)
+    name = db.Column(db.String(64), index=True)
+    email = db.Column(db.String(64), index=True, unique=True)
+    date = db.Column(db.DateTime)
+    height = db.Column(db.Float(Precision=2))
+    age = db.Column(db.Integer)
+    weight = db.Column(db.Boolean, default=False)
+    bmi = db.Column(db.Boolean, default=False)
+    fat = db.Column(db.Boolean, default=False)
+    muscle = db.Column(db.Boolean, default=False)
+    viceral = db.Column(db.Boolean, default=False)
+    bmr = db.Column(db.Boolean, default=False)
+    bodyage = db.Column(db.Boolean, default=False)
     control_user = db.relationship('Control', backref='user', lazy='dynamic')
 
     @property
@@ -94,21 +93,22 @@ class User(UserMixin, db.Model):
         return measures
 
     def get_controls(self):
-        return Control.query.filter(Control.user_id == self.id).order_by(Control.id.desc())
+        return Control.query.filter(Control.user_id == self.id)\
+                      .order_by(Control.id.desc())
 
 
 class Control(db.Model):
     __tablename__ = 'controls'
-    id       = db.Column(db.Integer, primary_key=True)
-    user_id  = db.Column(db.Integer, db.ForeignKey('users.id'))
-    date     = db.Column(db.DateTime)
-    weight   = db.Column(db.Float(Precision=2), default=0)
-    bmi      = db.Column(db.Float(Precision=2), default=0)
-    fat      = db.Column(db.Float(Precision=2), default=0)
-    muscle   = db.Column(db.Float(Precision=2), default=0)
-    viceral  = db.Column(db.Float(Precision=2), default=0)
-    bmr      = db.Column(db.Float(Precision=2), default=0)
-    bodyage  = db.Column(db.Float(Precision=2), default=0)
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    date = db.Column(db.DateTime)
+    weight = db.Column(db.Float(Precision=2), default=0)
+    bmi = db.Column(db.Float(Precision=2), default=0)
+    fat = db.Column(db.Float(Precision=2), default=0)
+    muscle = db.Column(db.Float(Precision=2), default=0)
+    viceral = db.Column(db.Float(Precision=2), default=0)
+    bmr = db.Column(db.Float(Precision=2), default=0)
+    bodyage = db.Column(db.Float(Precision=2), default=0)
 
     def __repr__(self):
         return '<Control %r>' % (self.id)
