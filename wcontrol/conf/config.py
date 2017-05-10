@@ -11,7 +11,7 @@ SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # oauth google config
-OAUTH_CREDENTIALS={
+OAUTH_CREDENTIALS = {
         'google': {
             'id': os.environ.get('WEIGHT_CONTROL_OAUTH_GOOGLE_ID'),
             'secret': os.environ.get('WEIGHT_CONTROL_OAUTH_GOOGLE_SECRET')
@@ -23,7 +23,7 @@ OAUTH_CREDENTIALS={
 }
 
 # measurements
-MEASUREMENTS=[
+MEASUREMENTS = [
         (1, 'Weight'),
         (2, 'BMI'),
         (3, 'Fat'),
