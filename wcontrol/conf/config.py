@@ -27,11 +27,10 @@ OAUTH_CREDENTIALS = {
 
 # measurements
 MEASUREMENTS = [
-        (1, 'Weight'),
-        (2, 'BMI'),
-        (3, 'Fat'),
-        (4, 'Muscle'),
-        (5, 'Viceral Fat'),
-        (6, 'Basal Metabolic Rate'),
-        (7, 'Body Age')
-]
+        (0, 'weight', 'Weight'),
+        (1, 'bmi', 'BMI'),
+        (2, 'fat', 'Fat'),
+        (3, 'muscle', 'Muscle'),
+        (4, 'viceral', 'Viceral Fat'),
+        (5, 'bmr', 'Basal Metabolic Rate'),
+        (6, 'bodyage', 'Body Age')]

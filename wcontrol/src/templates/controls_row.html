@@ -1,0 +1,10 @@
+<tr>
+    <td>{{ controls.date.month }}-{{ controls.date.day }}-{{ controls.date.year }}</td>
+    {% for i in user.get_measurements_index() %}
+        <td>{{ controls[i][1] }}</td>
+    {% endfor %}
+    <td style="width:60px">
+        <a><span class="glyphicon glyphicon-pencil" title="edit"></span></a>&nbsp
+        <a><span class="glyphicon glyphicon-remove" title="remove"></span></a>
+    </td>
+</tr>

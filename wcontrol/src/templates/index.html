@@ -6,6 +6,9 @@
     {% include 'flash.html' %}
     <div class="well">
         <h2>Hello, {{ user.name }}!</h2>
+        <a href="{{ url_for('add', nickname=user.nickname) }}">
+            <button type="button" class="btn btn-primary">New Control</button>
+        </a>
     </div>
 {% endblock %}
 

@@ -22,6 +22,7 @@
                     {% if g.user.is_authenticated %}
                     <ul class="nav navbar-nav">
                         <li><a href="{{ url_for('index') }}">Home</a></li>
+                        <li><a href="{{ url_for('controls', nickname=g.user.nickname) }}">Controls</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a>Hello {{ g.user.nickname }}!</a></li>
