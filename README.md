@@ -16,9 +16,16 @@ Then, you have to install flask and extensions:
 
 `$ env/bin/pip install -r requeriments.txt`
 
+Now, you have to create the environment variables with the absolute path to the `api.py` and the config file.
+
+```
+export FLASK_APP=$(pwd)/wcontrol/src/api.py
+export WCONTROL_CONF=wcontrol.conf.config
+```
+
 To create the database you have to run:
 
-`$ ./db_create.py`
+`$ python -m wcontrol.src.api -c`
 
 
 Authentication
@@ -26,7 +33,7 @@ Authentication
 
 The app uses OAuth authentication with Google and Facebook.
 
-You have to get your credentials and set them as environment varialbes with the names:
+You have to get your credentials and set them as environment variables with the names:
 
 ```
 WEIGHT_CONTROL_OAUTH_GOOGLE_ID
@@ -38,6 +45,19 @@ WEIGHT_CONTROL_OAUTH_FACEBOOK_SECRET
 Running
 -------
 
-To run the app just execute run.py
+To run the app you have to activate the virtual environment and then execute:
 
-`$ ./run.py`
+`$ python -m flask run --host=0.0.0.0 --debugger`
+
+
+
+Run the app with Docker
+-----------------------
+
+To run the app with docker, just execute the following commands.
+
+```
+$ docker build -t weigth-control .
+$ sudo service docker start
+$ docker run -p 5000:5000 weigth-control
+```
