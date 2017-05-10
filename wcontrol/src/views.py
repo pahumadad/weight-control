@@ -40,7 +40,7 @@ def oauth_callback(provider):
     if email is None:
         flash('Authentication failed.')
         return redirect(url_for('index'))
-    user=User.query.filter_by(email=email).first()
+    user = User.query.filter_by(email=email).first()
     if not user:
         if nickname is None or nickname == "":
             nickname = email.split('@')[0]
@@ -50,16 +50,17 @@ def oauth_callback(provider):
         date = datetime.utcnow()
         height = 0
         age = 0
-        user=User(nickname=nickname,
-                  name=name,
-                  email=email,
-                  date=date,
-                  height=height,
-                  age=age)
+        user = User(nickname=nickname,
+                    name=name,
+                    email=email,
+                    date=date,
+                    height=height,
+                    age=age)
         db.session.add(user)
         db.session.commit()
     login_user(user, remember=False)
     return redirect(url_for('index'))
+
 
 @app.route('/login')
 def login():
@@ -69,19 +70,23 @@ def login():
     return render_template('login.html',
                            title='Sign In')
 
+
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
 
+
 @app.before_request
 def before_request():
     g.user = current_user
 
+
 @lm.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
 
 @lm.unauthorized_handler
 def unauthorized():
@@ -92,12 +97,12 @@ def unauthorized():
 @login_required
 def user(nickname):
     user = User.query.filter_by(nickname=nickname).first()
-    if user == None:
+    if not user:
         flash('User %s not found.' % nickname)
         return redirect(url_for('index'))
     return render_template('user.html',
-                            title="Profile",
-                            user=user)
+                           title="Profile",
+                           user=user)
 
 
 @app.route('/user/<nickname>/edit', methods=['GET', 'POST'])
@@ -119,10 +124,10 @@ def edit(nickname):
         return redirect(url_for('user', nickname=user.nickname))
     else:
         form.nickname.data = user.nickname
-        form.name.data     = user.name
-        form.age.data      = user.age
-        form.height.data   = user.height
+        form.name.data = user.name
+        form.age.data = user.age
+        form.height.data = user.height
     return render_template('edit.html',
-                            title="Edit",
-                            user=user,
-                            form=form)
+                           title="Edit",
+                           user=user,
+                           form=form)
