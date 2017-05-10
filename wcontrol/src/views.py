@@ -1,11 +1,12 @@
-from flask import Flask, render_template, flash, redirect, url_for, g
+from flask import render_template, flash, redirect, url_for, g
 from flask_login import LoginManager
 from flask_login import login_user, logout_user, current_user, login_required
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from .models import User
-from .oauth import OAuthSignIn
-from .forms import EditForm
+from wcontrol.src.main import app
+from wcontrol.src.models import db, User
+from wcontrol.src.oauth import OAuthSignIn
+from wcontrol.src.forms import EditForm
+
 
 app = Flask(__name__)
 app.config.from_object("config")

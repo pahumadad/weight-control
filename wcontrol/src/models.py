@@ -1,4 +1,5 @@
-from app import db
+from wcontrol.src.main import app
+from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 
 

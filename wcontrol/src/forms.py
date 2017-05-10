@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, DecimalField
 from wtforms.validators import DataRequired
-from app.models import User
+from wcontrol.src.models import User
 
 
 class EditForm(FlaskForm):
