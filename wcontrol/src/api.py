@@ -57,6 +57,12 @@ def controls(nickname):
     return view.controls(nickname)
 
 
+@app.route('/controls/remove/<int:id>')
+@login_required
+def control_remove(id):
+    return view.control_remove(id)
+
+
 if __name__ == "__main__":
     if len(sys.argv):
         if sys.argv[1] == "-c" or sys.argv[1] == "--creatredb":

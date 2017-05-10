@@ -173,3 +173,14 @@ def controls(nickname):
     return render_template('controls.html',
                            title="User's Controls List",
                            user=user)
+
+
+def control_remove(id):
+    control = Control.query.filter_by(id=id).first()
+    if not control:
+        flash('Control does not exist')
+        return redirect(url_for('controls', nickname=g.user.nickname))
+    db.session.delete(control)
+    db.session.commit()
+    flash('The control has been deleted')
+    return redirect(url_for('controls', nickname=g.user.nickname))
