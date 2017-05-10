@@ -3,9 +3,10 @@ from flask_login import login_user, logout_user, current_user
 from flask_login import LoginManager
 from datetime import datetime
 from wcontrol.src.main import app
-from wcontrol.src.models import db, User
+from wcontrol.src.models import db, User, Control
 from wcontrol.src.oauth import OAuthSignIn
-from wcontrol.src.forms import EditForm
+from wcontrol.src.forms import EditForm, NewControlForm
+from wcontrol.conf.config import MEASUREMENTS
 
 lm = LoginManager(app)
 
