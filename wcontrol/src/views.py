@@ -1,19 +1,15 @@
 from flask import render_template, flash, redirect, url_for, g
+from flask_login import login_user, logout_user, current_user
 from flask_login import LoginManager
-from flask_login import login_user, logout_user, current_user, login_required
 from datetime import datetime
 from wcontrol.src.main import app
 from wcontrol.src.models import db, User
 from wcontrol.src.oauth import OAuthSignIn
 from wcontrol.src.forms import EditForm
 
-
 lm = LoginManager(app)
 
 
-@app.route('/')
-@app.route('/index')
-@login_required
 def index():
     user = g.user
     return render_template("index.html",
@@ -21,7 +17,6 @@ def index():
                            user=user)
 
 
-@app.route('/authorize/<provider>')
 def oauth_authorize(provider):
     if not current_user.is_anonymous:
         return redirect(url_for('index'))
@@ -29,7 +24,6 @@ def oauth_authorize(provider):
     return oauth.authorize()
 
 
-@app.route('/callback/<provider>')
 def oauth_callback(provider):
     if not current_user.is_anonymous:
         return redirect(url_for('index'))
@@ -60,7 +54,6 @@ def oauth_callback(provider):
     return redirect(url_for('index'))
 
 
-@app.route('/login')
 def login():
     if g.user is not None and g.user.is_authenticated:
         flash('inside if g.user in login()')
@@ -69,8 +62,6 @@ def login():
                            title='Sign In')
 
 
-@app.route('/logout')
-@login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
@@ -91,8 +82,6 @@ def unauthorized():
     return redirect(url_for('login'))
 
 
-@app.route('/user/<nickname>')
-@login_required
 def user(nickname):
     user = User.query.filter_by(nickname=nickname).first()
     if not user:
@@ -103,8 +92,6 @@ def user(nickname):
                            user=user)
 
 
-@app.route('/user/<nickname>/edit', methods=['GET', 'POST'])
-@login_required
 def edit(nickname):
     if g.user.nickname != nickname:
         flash('You can not edit someone else profile')
