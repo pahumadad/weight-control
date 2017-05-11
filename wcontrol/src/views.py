@@ -13,9 +13,11 @@ lm = LoginManager(app)
 
 def index():
     user = g.user
+    control = user.get_last_control()
     return render_template("index.html",
                            title="Home",
-                           user=user)
+                           user=user,
+                           control=control)
 
 
 def oauth_authorize(provider):
