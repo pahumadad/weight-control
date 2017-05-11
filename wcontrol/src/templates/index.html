@@ -2,10 +2,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Index Page</h1>
+    <h1>{{ user.name }}</h1>
     {% include 'flash.html' %}
     <div class="well">
-        <h2>Hello, {{ user.name }}!</h2>
+        <h2>Last Control Info</h2>
+        <br>
+        <p>Last Control Date: <strong>{{ momentjs(control.date).format("MMMM Do, YYYY") }}</strong> ({{ momentjs(control.date).fromNow() }}) </p>
+        <hr>
         <a href="{{ url_for('add', nickname=user.nickname) }}">
             <button type="button" class="btn btn-primary">New Control</button>
         </a>
