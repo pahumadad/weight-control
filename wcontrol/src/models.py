@@ -94,7 +94,11 @@ class User(UserMixin, db.Model):
 
     def get_controls(self):
         return Control.query.filter(Control.user_id == self.id)\
-                      .order_by(Control.id.desc())
+                      .order_by(Control.date.desc())
+
+    def get_last_control(self):
+        return Control.query.filter(Control.user_id == self.id)\
+                      .order_by(Control.date.desc()).first()
 
 
 class Control(db.Model):
