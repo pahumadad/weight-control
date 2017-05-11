@@ -6,6 +6,7 @@ from wcontrol.src.app import app
 from wcontrol.src.models import db, User, Control
 from wcontrol.src.oauth import OAuthSignIn
 from wcontrol.src.forms import EditForm, NewControlForm
+from wcontrol.src.results import results
 from wcontrol.conf.config import MEASUREMENTS
 
 lm = LoginManager(app)
@@ -14,10 +15,12 @@ lm = LoginManager(app)
 def index():
     user = g.user
     control = user.get_last_control()
+    result = results(control)
     return render_template("index.html",
                            title="Home",
                            user=user,
-                           control=control)
+                           control=control,
+                           result=result)
 
 
 def oauth_authorize(provider):
