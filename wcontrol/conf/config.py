@@ -26,11 +26,20 @@ OAUTH_CREDENTIALS = {
 }
 
 # measurements
-MEASUREMENTS = [
-        (0, 'weight', 'Weight'),
-        (1, 'bmi', 'BMI'),
-        (2, 'fat', 'Fat'),
-        (3, 'muscle', 'Muscle'),
-        (4, 'viceral', 'Viceral Fat'),
-        (5, 'bmr', 'Basal Metabolic Rate'),
-        (6, 'bodyage', 'Body Age')]
+MEASUREMENTS = [(0, 'weight', 'Weight'),
+                (1, 'bmi', 'BMI'),
+                (2, 'fat', 'Fat'),
+                (3, 'muscle', 'Muscle'),
+                (4, 'viceral', 'Viceral Fat'),
+                (5, 'bmr', 'Basal Metabolic Rate'),
+                (6, 'bodyage', 'Body Age')]
+
+# bmi categories
+BMI = [(15, 'Very severely underweight'),
+       (16, 'Severely underweight'),
+       (18.5, 'Underweight'),
+       (25, 'Normal (healthy weight)'),
+       (30, 'Overweight'),
+       (35, 'Obese Class I (Moderately obese)'),
+       (40, 'Obese Class II (Severely obese)'),
+       (1000, 'Obese Class III (Very severely obese)')]
