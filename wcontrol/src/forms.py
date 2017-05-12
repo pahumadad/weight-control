@@ -1,13 +1,17 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, DecimalField, BooleanField,\
-                    DateField, FormField, FieldList
+                    DateField, FormField, FieldList, SelectField
 from wtforms.validators import DataRequired
 from wcontrol.src.models import User
+
+
+GENDER = [('Feminine', 'Feminine'), ('Masculine', 'Masculine')]
 
 
 class EditForm(FlaskForm):
     nickname = StringField('nickname', validators=[DataRequired()])
     name = StringField('name', validators=[DataRequired()])
+    gender = SelectField('gender', choices=GENDER)
     age = IntegerField('age')
     height = DecimalField('height', places=2)
     weight = BooleanField('weight')
