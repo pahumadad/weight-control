@@ -69,6 +69,18 @@
                 {% include 'visceral_desc.html' %}
             </div>
         </div>
+        <div class"col-sm-12">
+            <p>Resting Metabolic Rate (RMR): <strong>{{ control.rmr }}</strong>&nbsp;
+                <a href="#rmr_desc" data-toggle="collapse">
+                    <span class="glyphicon glyphicon-question-sign"></span>
+                </a>
+            </p>
+        </div>
+        <div id="rmr_desc" class="collapse col-sm-12">
+            <div class="col-sm-offset-1 col-sm-10">
+                {% include 'rmr_desc.html' %}
+            </div>
+        </div>
         <div class="col-sm-12">
             <div class="col-sm-offset-3 col-sm-6">
                 <hr>
