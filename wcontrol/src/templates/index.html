@@ -9,7 +9,6 @@
         <br>
         <p>Control Date: <strong>{{ momentjs(control.date).format("MMMM Do, YYYY") }}</strong> ({{ momentjs(control.date).fromNow() }}) </p>
         <br>
-        <p>BMI: <strong>{{ control.bmi }}</strong> - {{ result.bmi }}</p>
         <div class"col-sm-12">
             <p>Weight: <strong>{{ control.weight }}</strong>&nbsp;
                 <a href="#weight_desc" data-toggle="collapse">
@@ -20,6 +19,18 @@
         <div id="weight_desc" class="collapse col-sm-12">
             <div class="col-sm-offset-1 col-sm-10">
                 {% include 'weight_desc.html' %}
+            </div>
+        </div>
+        <div class"col-sm-12">
+            <p>BMI: <strong>{{ control.bmi }}</strong> - {{ result.bmi }}&nbsp;
+                <a href="#bmi_desc" data-toggle="collapse">
+                    <span class="glyphicon glyphicon-question-sign"></span>
+                </a>
+            </p>
+        </div>
+        <div id="bmi_desc" class="collapse col-sm-12">
+            <div class="col-sm-offset-1 col-sm-10">
+                {% include 'bmi_desc.html' %}
             </div>
         </div>
         <div class="col-sm-12">
