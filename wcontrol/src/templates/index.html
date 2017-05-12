@@ -57,6 +57,18 @@
                 {% include 'muscle_desc.html' %}
             </div>
         </div>
+        <div class"col-sm-12">
+            <p>Visceral Fat: <strong>{{ control.visceral }}</strong>&nbsp;
+                <a href="#visceral_desc" data-toggle="collapse">
+                    <span class="glyphicon glyphicon-question-sign"></span>
+                </a>
+            </p>
+        </div>
+        <div id="visceral_desc" class="collapse col-sm-12">
+            <div class="col-sm-offset-1 col-sm-10">
+                {% include 'visceral_desc.html' %}
+            </div>
+        </div>
         <div class="col-sm-12">
             <div class="col-sm-offset-3 col-sm-6">
                 <hr>
