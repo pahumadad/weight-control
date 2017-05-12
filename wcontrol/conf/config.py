@@ -57,3 +57,8 @@ MUSCLE = [(24, 33, 'Low'),
           (30, 39, 'Normal'),
           (35, 44, 'High'),
           (100, 100, 'Very High')]
+
+# visceral fat categories: |max|description|
+VISCERAL = [(9, 'Normal'),
+            (14, 'High'),
+            (50, 'very High')]
