@@ -81,6 +81,18 @@
                 {% include 'rmr_desc.html' %}
             </div>
         </div>
+        <div class"col-sm-12">
+            <p>Body Age: <strong>{{ control.bodyage }}</strong>&nbsp;
+                <a href="#bodyage_desc" data-toggle="collapse">
+                    <span class="glyphicon glyphicon-question-sign"></span>
+                </a>
+            </p>
+        </div>
+        <div id="bodyage_desc" class="collapse col-sm-12">
+            <div class="col-sm-offset-1 col-sm-10">
+                {% include 'bodyage_desc.html' %}
+            </div>
+        </div>
         <div class="col-sm-12">
             <div class="col-sm-offset-3 col-sm-6">
                 <hr>
