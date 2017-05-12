@@ -1,4 +1,4 @@
-from wcontrol.conf.config import BMI, BFP, MUSCLE
+from wcontrol.conf.config import BMI, BFP, MUSCLE, VISCERAL
 
 
 class results(object):
@@ -6,6 +6,7 @@ class results(object):
         self.bmi = self.get_bmi(control.bmi)
         self.fat = self.get_fat(control.fat, gender)
         self.muscle = self.get_muscle(control.muscle, gender)
+        self.visceral = self.get_visceral(control.visceral)
 
     def get_bmi(self, bmi):
         for limit, msg in BMI:
@@ -24,4 +25,9 @@ class results(object):
             if gender == 'Female' and muscle <= limit_w:
                 return msg
             if gender == 'Male' and muscle <= limit_m:
+                return msg
+
+    def get_visceral(self, visceral):
+        for limit, msg in VISCERAL:
+            if visceral <= limit:
                 return msg
