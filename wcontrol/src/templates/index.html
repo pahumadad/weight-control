@@ -7,7 +7,15 @@
     <div class="well">
         <h2>Last Control</h2>
         <br>
-        <p>Control Date: <strong>{{ momentjs(control.date).format("MMMM Do, YYYY") }}</strong> ({{ momentjs(control.date).fromNow() }}) </p>
+        {% if not control %}
+        <p>You don't have any control yet.</p>
+        {% else %}
+        <p>Control Date:
+                <strong>
+                    {{ momentjs(control.date).format("MMMM Do, YYYY") }}
+                </strong>
+                ({{ momentjs(control.date).fromNow() }})
+        </p>
         <br>
         <div class"col-sm-12">
             <p>Weight: <strong>{{ control.weight }}</strong>&nbsp;
@@ -93,6 +101,7 @@
                 {% include 'bodyage_desc.html' %}
             </div>
         </div>
+        {% endif %}
         <div class="col-sm-12">
             <div class="col-sm-offset-3 col-sm-6">
                 <hr>
