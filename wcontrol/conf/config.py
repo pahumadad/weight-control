@@ -34,7 +34,7 @@ MEASUREMENTS = [(0, 'weight', 'Weight'),
                 (5, 'bmr', 'Basal Metabolic Rate'),
                 (6, 'bodyage', 'Body Age')]
 
-# bmi categories
+# bmi categories: |max|description|
 BMI = [(15, 'Very severely underweight'),
        (16, 'Severely underweight'),
        (18.5, 'Underweight'),
@@ -43,3 +43,11 @@ BMI = [(15, 'Very severely underweight'),
        (35, 'Obese Class I (Moderately obese)'),
        (40, 'Obese Class II (Severely obese)'),
        (1000, 'Obese Class III (Very severely obese)')]
+
+# fat categories: |women (min)|men (min)|description|
+FAT = [(10, 2, 'Essential fat'),
+       (14, 6, 'Athletes'),
+       (21, 13, 'Fitness'),
+       (25, 17, 'Average'),
+       (31, 22, 'Overweight'),
+       (40, 30, 'Obese')]
