@@ -8,7 +8,7 @@
         <form class="form-horizontal" action="" method="post" name="control_remove">
             {{ form.hidden_tag() }}
             <div class="form-group{% if form.date.errors %} error{% endif %}">
-                <label class="control-label col-sm-2" for="date">Date:</label>
+                <label class="control-label col-sm-3" for="date">Date:</label>
                 <div class="col-sm-4">
                     {{ form.date(maxlength=64, class="form-control", type="date", id="disabledInput", disabled=True) }}
                     {% for error in form.date.errors %}
@@ -18,7 +18,7 @@
             </div>
             {% for m in form.measurements %}
                 <div class="form-group{% if m.form.value.errors %} error{% endif %}">
-                    <label class="control-label col-sm-2" for="date">{{ m.form.value.label }}:</label>
+                    <label class="control-label col-sm-3" for="date">{{ m.form.value.label }}:</label>
                     <div class="col-sm-4">
                         {{ m.form.value(maxlength=64, class="form-control", type="decimal", required=m.form.value.flags.required) }}
                         {% for error in m.form.value.errors %}
@@ -28,7 +28,7 @@
                 </div>
             {% endfor %}
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-4">
+                <div class="col-sm-offset-3 col-sm-4">
                     <a href="{{ url_for('controls', nickname=g.user.nickname) }}" name="cancel" class="btn btn-default">Cancel</a>&nbsp;&nbsp;&nbsp;
                     <input class="btn btn-primary" type="submit" value="Save">
                 </div>
