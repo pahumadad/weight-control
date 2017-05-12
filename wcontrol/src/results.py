@@ -14,14 +14,14 @@ class results(object):
 
     def get_fat(self, fat, gender):
         for limit_w, limit_m, msg in BFP:
-            if gender == 'Feminine' and fat <= limit_w:
+            if gender == 'Female' and fat <= limit_w:
                 return msg
-            if gender == 'Masculine' and fat <= limit_m:
+            if gender == 'Male' and fat <= limit_m:
                 return msg
 
     def get_muscle(self, muscle, gender):
         for limit_w, limit_m, msg in MUSCLE:
-            if gender == 'Feminine' and muscle <= limit_w:
+            if gender == 'Female' and muscle <= limit_w:
                 return msg
-            if gender == 'Masculine' and muscle <= limit_m:
+            if gender == 'Male' and muscle <= limit_m:
                 return msg

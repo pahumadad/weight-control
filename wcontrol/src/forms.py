@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired
 from wcontrol.src.models import User
 
 
-GENDER = [('Feminine', 'Feminine'), ('Masculine', 'Masculine')]
+GENDER = [('Female', 'Female'), ('Male', 'Male')]
 
 
 class EditForm(FlaskForm):
