@@ -23,7 +23,9 @@
                     {% if g.user.is_authenticated %}
                     <ul class="nav navbar-nav">
                         <li><a href="{{ url_for('index') }}">Home</a></li>
+                        {% if g.user.get_last_control() %}
                         <li><a href="{{ url_for('controls', nickname=g.user.nickname) }}">Controls</a></li>
+                        {% endif %}
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a>Hello {{ g.user.nickname }}!</a></li>
