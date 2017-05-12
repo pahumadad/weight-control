@@ -19,7 +19,7 @@ def index():
         return render_template("index.html",
                                title="Home",
                                user=user)
-    result = results(control)
+    result = results(control, user.gender)
     return render_template("index.html",
                            title="Home",
                            user=user,
