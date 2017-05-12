@@ -111,6 +111,7 @@ def edit(nickname):
     if form.validate_on_submit():
         user.nickname = form.nickname.data
         user.name = form.name.data
+        user.gender = form.gender.data
         user.age = form.age.data
         user.height = form.height.data
         user.weight = form.weight.data
@@ -127,6 +128,7 @@ def edit(nickname):
     else:
         form.nickname.data = user.nickname
         form.name.data = user.name
+        form.gender.data = user.gender
         form.age.data = user.age
         form.height.data = user.height
         form.weight.data = user.weight
