@@ -20,8 +20,8 @@ class User(UserMixin, db.Model):
     bmi = db.Column(db.Boolean, default=False)
     fat = db.Column(db.Boolean, default=False)
     muscle = db.Column(db.Boolean, default=False)
-    viceral = db.Column(db.Boolean, default=False)
-    bmr = db.Column(db.Boolean, default=False)
+    visceral = db.Column(db.Boolean, default=False)
+    rmr = db.Column(db.Boolean, default=False)
     bodyage = db.Column(db.Boolean, default=False)
     control_user = db.relationship('Control', backref='user', lazy='dynamic')
 
@@ -65,9 +65,9 @@ class User(UserMixin, db.Model):
         if index == 3:
             return self.muscle
         if index == 4:
-            return self.viceral
+            return self.visceral
         if index == 5:
-            return self.bmr
+            return self.rmr
         if index == 6:
             return self.bodyage
 
@@ -110,8 +110,8 @@ class Control(db.Model):
     bmi = db.Column(db.Float(Precision=2), default=0)
     fat = db.Column(db.Float(Precision=2), default=0)
     muscle = db.Column(db.Float(Precision=2), default=0)
-    viceral = db.Column(db.Float(Precision=2), default=0)
-    bmr = db.Column(db.Float(Precision=2), default=0)
+    visceral = db.Column(db.Float(Precision=2), default=0)
+    rmr = db.Column(db.Float(Precision=2), default=0)
     bodyage = db.Column(db.Float(Precision=2), default=0)
 
     def __repr__(self):
@@ -127,9 +127,9 @@ class Control(db.Model):
         if index == 3:
             return [self.__table__.columns.keys()[6], self.muscle]
         if index == 4:
-            return [self.__table__.columns.keys()[7], self.viceral]
+            return [self.__table__.columns.keys()[7], self.visceral]
         if index == 5:
-            return [self.__table__.columns.keys()[8], self.bmr]
+            return [self.__table__.columns.keys()[8], self.rmr]
         if index == 6:
             return [self.__table__.columns.keys()[9], self.bodyage]
 

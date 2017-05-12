@@ -14,8 +14,8 @@ class EditForm(FlaskForm):
     bmi = BooleanField('bmi')
     fat = BooleanField('fat')
     muscle = BooleanField('muscle')
-    viceral = BooleanField('viceral')
-    bmr = BooleanField('bmr')
+    visceral = BooleanField('visceral')
+    rmr = BooleanField('rmr')
     bodyage = BooleanField('bodyage')
 
     def __init__(self, original_nickname, *args, **kwargs):

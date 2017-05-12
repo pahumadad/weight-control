@@ -113,8 +113,8 @@ def edit(nickname):
         user.bmi = form.bmi.data
         user.fat = form.fat.data
         user.muscle = form.muscle.data
-        user.viceral = form.viceral.data
-        user.bmr = form.bmr.data
+        user.visceral = form.visceral.data
+        user.rmr = form.rmr.data
         user.bodyage = form.bodyage.data
         db.session.add(user)
         db.session.commit()
@@ -129,8 +129,8 @@ def edit(nickname):
         form.bmi.data = user.bmi
         form.fat.data = user.fat
         form.muscle.data = user.muscle
-        form.viceral.data = user.viceral
-        form.bmr.data = user.bmr
+        form.visceral.data = user.visceral
+        form.rmr.data = user.rmr
         form.bodyage.data = user.bodyage
     return render_template('edit.html',
                            title="Edit User Profile",

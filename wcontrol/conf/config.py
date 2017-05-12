@@ -27,11 +27,11 @@ OAUTH_CREDENTIALS = {
 
 # measurements
 MEASUREMENTS = [(0, 'weight', 'Weight'),
-                (1, 'bmi', 'BMI'),
-                (2, 'fat', 'Fat'),
-                (3, 'muscle', 'Muscle'),
-                (4, 'viceral', 'Viceral Fat'),
-                (5, 'bmr', 'Basal Metabolic Rate'),
+                (1, 'bmi', 'Body Mass Index (BMI)'),
+                (2, 'fat', 'Body Fat Percentage (BFP)'),
+                (3, 'muscle', 'Skeletal Muscle'),
+                (4, 'visceral', 'Visceral Fat'),
+                (5, 'rmr', 'Resting Metabolic Rate (RMR)'),
                 (6, 'bodyage', 'Body Age')]
 
 # bmi categories: |max|description|
