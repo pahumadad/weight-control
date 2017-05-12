@@ -9,9 +9,24 @@
         <br>
         <p>Control Date: <strong>{{ momentjs(control.date).format("MMMM Do, YYYY") }}</strong> ({{ momentjs(control.date).fromNow() }}) </p>
         <br>
-        <p>Weight: <strong>{{ control.weight }}</strong></p>
         <p>BMI: <strong>{{ control.bmi }}</strong> - {{ result.bmi }}</p>
-        <hr>
+        <div class"col-sm-12">
+            <p>Weight: <strong>{{ control.weight }}</strong>&nbsp;
+                <a href="#weight_desc" data-toggle="collapse">
+                    <span class="glyphicon glyphicon-question-sign"></span>
+                </a>
+            </p>
+        </div>
+        <div id="weight_desc" class="collapse col-sm-12">
+            <div class="col-sm-offset-1 col-sm-10">
+                {% include 'weight_desc.html' %}
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="col-sm-offset-3 col-sm-6">
+                <hr>
+            </div>
+        </div>
         <a href="{{ url_for('add', nickname=user.nickname) }}">
             <button type="button" class="btn btn-primary">New Control</button>
         </a>
