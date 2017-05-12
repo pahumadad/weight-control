@@ -6,6 +6,7 @@ from wcontrol.src.app import app
 from wcontrol.src.models import db, User, Control
 from wcontrol.src.oauth import OAuthSignIn
 from wcontrol.src.forms import EditForm, NewControlForm
+from wcontrol.src.results import results
 from wcontrol.conf.config import MEASUREMENTS
 
 lm = LoginManager(app)
@@ -13,9 +14,17 @@ lm = LoginManager(app)
 
 def index():
     user = g.user
+    control = user.get_last_control()
+    if control is None:
+        return render_template("index.html",
+                               title="Home",
+                               user=user)
+    result = results(control, user.gender)
     return render_template("index.html",
                            title="Home",
-                           user=user)
+                           user=user,
+                           control=control,
+                           result=result)
 
 
 def oauth_authorize(provider):
@@ -102,14 +111,15 @@ def edit(nickname):
     if form.validate_on_submit():
         user.nickname = form.nickname.data
         user.name = form.name.data
+        user.gender = form.gender.data
         user.age = form.age.data
         user.height = form.height.data
         user.weight = form.weight.data
         user.bmi = form.bmi.data
         user.fat = form.fat.data
         user.muscle = form.muscle.data
-        user.viceral = form.viceral.data
-        user.bmr = form.bmr.data
+        user.visceral = form.visceral.data
+        user.rmr = form.rmr.data
         user.bodyage = form.bodyage.data
         db.session.add(user)
         db.session.commit()
@@ -118,14 +128,15 @@ def edit(nickname):
     else:
         form.nickname.data = user.nickname
         form.name.data = user.name
+        form.gender.data = user.gender
         form.age.data = user.age
         form.height.data = user.height
         form.weight.data = user.weight
         form.bmi.data = user.bmi
         form.fat.data = user.fat
         form.muscle.data = user.muscle
-        form.viceral.data = user.viceral
-        form.bmr.data = user.bmr
+        form.visceral.data = user.visceral
+        form.rmr.data = user.rmr
         form.bodyage.data = user.bodyage
     return render_template('edit.html',
                            title="Edit User Profile",

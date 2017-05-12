@@ -1,5 +1,5 @@
 <tr>
-    <td>{{ controls.date.month }}-{{ controls.date.day }}-{{ controls.date.year }}</td>
+    <td>{{ momentjs(controls.date).format("MMM Do, YY") }}</td>
     {% for i in user.get_measurements_index() %}
         <td>{{ controls[i][1] }}</td>
     {% endfor %}

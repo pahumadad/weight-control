@@ -11,26 +11,40 @@
             <div class="col-sm-12">
                 <div class="col-sm-6">
                     <p>Name: <strong>{{ user.name }}</strong></p>
-                    {% if user.id == g.user.id %}
-                    <p>Email: <strong>{{ user.email }}</strong></p>
-                    {% endif %}
                 </div>
                 {% if user.id == g.user.id %}
                 <div class="col-sm-6">
-                    <p>Age: <strong>{{ user.age }}</strong></p>
-                    <p>Height: <strong>{{ user.height }}</strong></p>
+                    <p>Email: <strong>{{ user.email }}</strong></p>
                 </div>
                 {% endif %}
             </div>
+            {% if user.id == g.user.id %}
+            <div class="col-sm-12">
+                <hr>
+            </div>
+            <div class="col-sm-12">
+                <div class="col-sm-4">
+                    <p>Gender: <strong>{{ user.gender }}</strong></p>
+                </div>
+                <div class="col-sm-4">
+                    <p>Age: <strong>{{ user.age }}</strong></p>
+                </div>
+                <div class="col-sm-4">
+                    <p>Height: <strong>{{ user.height }}</strong></p>
+                </div>
+            </div>
+            {% endif %}
         </div>
-        <hr>
+        <div class="col-sm-12">
+            <hr>
+        </div>
         <h3>Measurements</h3>
         <br>
         <div class="row">
             <div class="col-sm-12">
                 {% for measurement in user.get_measurements() %}
                     <div class="col-sm-4">
-                        <p>{{ measurement }}</p>
+                        <p><span class="glyphicon glyphicon-ok"></span>&nbsp; {{ measurement }}</p>
                     </div>
                 {% endfor %}
             </div>

@@ -25,6 +25,15 @@
                     {% endfor %}
                 </div>
             </div>
+            <div class="form-group{% if form.gender.errors %} error{% endif %}">
+                <label class="control-label col-sm-2" for="name">Your gender:</label>
+                <div class="col-sm-4">
+                    {{ form.gender(maxlength=64, class="form-control") }}
+                    {% for error in form.gender.errors %}
+                        <span class="help-inline">[{{ error }}]</span><br>
+                    {% endfor %}
+                </div>
+            </div>
             <div class="form-group{% if form.age.errors %} error{% endif %}">
                 <label class="control-label col-sm-2" for="age">Your age:</label>
                 <div class="col-sm-4">
@@ -48,55 +57,188 @@
                 <div class="col-sm-offset-1 col-sm-3">
                     <label class="checkbox" for="weight">
                         {{ form.weight }} Weight
+                        <a href="#modal_weight_desc" data-toggle="modal">
+                            <span class="glyphicon glyphicon-question-sign"></span>
+                        </a>
                     </label>
+                </div>
+            </div>
+            <div id="modal_weight_desc" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Weight</h4>
+                        </div>
+                        <div class="modal-body">
+                            {% include 'weight_desc.html' %}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="control-group">
                 <div class="col-sm-offset-1 col-sm-3">
                     <label class="checkbox" for="bmi">
-                        {{ form.bmi }} BMI
+                        {{ form.bmi }} Body Mass Index (BMI)
+                        <a href="#modal_bmi_desc" data-toggle="modal">
+                            <span class="glyphicon glyphicon-question-sign"></span>
+                        </a>
                     </label>
+                </div>
+            </div>
+            <div id="modal_bmi_desc" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Body Mass Index (BMI)</h4>
+                        </div>
+                        <div class="modal-body">
+                            {% include 'bmi_desc.html' %}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="control-group">
                 <div class="col-sm-offset-1 col-sm-3">
                     <label class="checkbox" for="fat">
-                        {{ form.fat }} Fat
+                        {{ form.fat }} Body Fat Percentage (BFP)
+                        <a href="#modal_fat_desc" data-toggle="modal">
+                            <span class="glyphicon glyphicon-question-sign"></span>
+                        </a>
                     </label>
+                </div>
+            </div>
+            <div id="modal_fat_desc" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Body Fat Percentage (BFP)</h4>
+                        </div>
+                        <div class="modal-body">
+                            {% include 'fat_desc.html' %}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="control-group">
                 <div class="col-sm-offset-1 col-sm-3">
                     <label class="checkbox" for="muscle">
-                        {{ form.muscle }} Muscle
+                        {{ form.muscle }} Skeletal Muscle
+                        <a href="#modal_muscle_desc" data-toggle="modal">
+                            <span class="glyphicon glyphicon-question-sign"></span>
+                        </a>
                     </label>
+                </div>
+            </div>
+            <div id="modal_muscle_desc" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Skeletal Muscle</h4>
+                        </div>
+                        <div class="modal-body">
+                            {% include 'muscle_desc.html' %}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="control-group">
                 <div class="col-sm-offset-1 col-sm-3">
                     <label class="checkbox" for="viceral">
-                        {{ form.viceral }} Viceral Fat
+                        {{ form.visceral }} Visceral Fat
+                        <a href="#modal_visceral_desc" data-toggle="modal">
+                            <span class="glyphicon glyphicon-question-sign"></span>
+                        </a>
                     </label>
+                </div>
+            </div>
+            <div id="modal_visceral_desc" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Visceral Fat</h4>
+                        </div>
+                        <div class="modal-body">
+                            {% include 'visceral_desc.html' %}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="control-group">
                 <div class="col-sm-offset-1 col-sm-3">
                     <label class="checkbox" for="bmr">
-                        {{ form.bmr }} Basal Metabolic Rate
+                        {{ form.rmr }} Resting Metabolic Rate (RMR)
+                        <a href="#modal_rmr_desc" data-toggle="modal">
+                            <span class="glyphicon glyphicon-question-sign"></span>
+                        </a>
                     </label>
+                </div>
+            </div>
+            <div id="modal_rmr_desc" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Resting Metabolic Rate (RMR)</h4>
+                        </div>
+                        <div class="modal-body">
+                            {% include 'rmr_desc.html' %}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="control-group">
                 <div class="col-sm-offset-1 col-sm-3">
                     <label class="checkbox" for="bodyage">
                         {{ form.bodyage }} Body Age
+                        <a href="#modal_bodyage_desc" data-toggle="modal">
+                            <span class="glyphicon glyphicon-question-sign"></span>
+                        </a>
                     </label>
+                </div>
+            </div>
+            <div id="modal_bodyage_desc" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Body Age</h4>
+                        </div>
+                        <div class="modal-body">
+                            {% include 'bodyage_desc.html' %}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <hr class="col-sm-offset-3 col-sm-6">
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-4">
-                    <a href="{{ url_for('user', nickname=user.nickname) }}" name="cancel" class="btn btn-default">Cancel</a>&nbsp&nbsp&nbsp
+                    <a href="{{ url_for('user', nickname=user.nickname) }}" name="cancel" class="btn btn-default">Cancel</a>&nbsp;&nbsp;&nbsp;
                     <input class="btn btn-primary" type="submit" value="Save Changes">
                 </div>
             </div>

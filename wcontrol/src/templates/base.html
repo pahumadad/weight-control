@@ -10,6 +10,7 @@
         <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://momentjs.com/downloads/moment.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
@@ -22,7 +23,9 @@
                     {% if g.user.is_authenticated %}
                     <ul class="nav navbar-nav">
                         <li><a href="{{ url_for('index') }}">Home</a></li>
+                        {% if g.user.get_last_control() %}
                         <li><a href="{{ url_for('controls', nickname=g.user.nickname) }}">Controls</a></li>
+                        {% endif %}
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a>Hello {{ g.user.nickname }}!</a></li>
