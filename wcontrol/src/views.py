@@ -15,6 +15,10 @@ lm = LoginManager(app)
 def index():
     user = g.user
     control = user.get_last_control()
+    if control is None:
+        return render_template("index.html",
+                               title="Home",
+                               user=user)
     result = results(control)
     return render_template("index.html",
                            title="Home",
