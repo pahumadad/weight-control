@@ -51,3 +51,9 @@ BFP = [(13, 5, 'Essential fat'),
        (30, 21, 'Average'),
        (39, 29, 'Overweight'),
        (100, 100, 'Obese')]
+
+# muscle categories: |women|men|description|
+MUSCLE = [(24, 33, 'Low'),
+          (30, 39, 'Normal'),
+          (35, 44, 'High'),
+          (100, 100, 'Very High')]
