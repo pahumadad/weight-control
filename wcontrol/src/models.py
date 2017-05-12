@@ -12,6 +12,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nickname = db.Column(db.String(64), index=True, unique=True)
     name = db.Column(db.String(64), index=True)
+    gender = db.Column(db.String(64), index=True)
     email = db.Column(db.String(64), index=True, unique=True)
     date = db.Column(db.DateTime)
     height = db.Column(db.Float(Precision=2))
