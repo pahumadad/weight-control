@@ -101,6 +101,10 @@ class User(UserMixin, db.Model):
         return Control.query.filter(Control.user_id == self.id)\
                       .order_by(Control.date.desc(), Control.id.desc()).first()
 
+    def get_controls_asc(self):
+        return Control.query.filter(Control.user_id == self.id)\
+                      .order_by(Control.date.asc(), Control.id.asc())
+
 
 class Control(db.Model):
     __tablename__ = 'controls'
