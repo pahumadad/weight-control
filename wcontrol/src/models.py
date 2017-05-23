@@ -137,6 +137,8 @@ class Control(db.Model):
             return [self.__table__.columns.keys()[8], self.rmr]
         if index == 6:
             return [self.__table__.columns.keys()[9], self.bodyage]
+        if index == 7:
+            return [self.__table__.columns.keys()[2], self.date]
 
     def set_attribute(self, attr, value):
         self.__setattr__(attr, value)
