@@ -14,7 +14,7 @@ In order to install, you have to clone this repository and create a virtual envi
 
 Then, you have to install flask and extensions:
 
-`$ env/bin/pip install -r requeriments.txt`
+`$ env/bin/pip install -r requirements.txt`
 
 Now, you have to create the environment variables with the absolute path to the `api.py` and the config file.
 
