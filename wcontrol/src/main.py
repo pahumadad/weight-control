@@ -69,6 +69,12 @@ def control_remove(nickname, id):
     return view.control_remove(nickname, id)
 
 
+@app.route('/user/<nickname>/controls/chart')
+@login_required
+def charts(nickname):
+    return view.charts(nickname)
+
+
 if __name__ == "__main__":
     if len(sys.argv):
         if sys.argv[1] == "-c" or sys.argv[1] == "--creatredb":
