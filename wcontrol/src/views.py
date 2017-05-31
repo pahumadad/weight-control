@@ -236,3 +236,44 @@ def control_remove(nickname, id):
     db.session.commit()
     flash('The control has been deleted')
     return redirect(url_for('controls', nickname=g.user.nickname))
+
+
+def charts(nickname):
+    if g.user.nickname != nickname:
+        flash('You can not see someone else charts')
+        return redirect(url_for('charts', nickname=g.user.nickname))
+    user = User.query.filter_by(nickname=nickname).first()
+    control = user.get_last_control()
+    if control is None:
+        return render_template("index.html",
+                               title="Home",
+                               user=user)
+    controls = user.get_controls_asc()
+    labels = []
+    weight = []
+    bmi = []
+    bfp = []
+    muscle = []
+    visceral = []
+    rmr = []
+    bodyage = []
+    for control in controls:
+        labels.append(control[7][1])
+        weight.append(control[0][1])
+        bmi.append(control[1][1])
+        bfp.append(control[2][1])
+        muscle.append(control[3][1])
+        visceral.append(control[4][1])
+        rmr.append(control[5][1])
+        bodyage.append(control[6][1])
+    return render_template("charts.html",
+                           title="Charts",
+                           user=user,
+                           labels=labels,
+                           weight=weight,
+                           bmi=bmi,
+                           bfp=bfp,
+                           muscle=muscle,
+                           visceral=visceral,
+                           rmr=rmr,
+                           bodyage=bodyage)
