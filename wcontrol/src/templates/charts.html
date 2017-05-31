@@ -1,0 +1,170 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Charts</h1>
+    {% include 'flash.html' %}
+        <div class="col-sm-4">
+            <h3>Weight</h3>
+            <canvas id="weight" class="col-sm-12"></canvas>
+            <br>
+        </div>
+        <div class="col-sm-4">
+            <h3>Body Mass Index (BMI)</h3>
+            <canvas id="bmi" class="col-sm-12"></canvas>
+            <br>
+        </div>
+        <div class="col-sm-4">
+            <h3>BFP and Skeletal Muscle</h3>
+            <canvas id="bfp-muscle" class="col-sm-12"></canvas>
+            <br>
+        </div>
+        <div class="col-sm-4">
+            <h3>Visceral Fat</h3>
+            <canvas id="visceral" class="col-sm-12"></canvas>
+            <br>
+        </div>
+        <div class="col-sm-4">
+            <h3>Resting Metabolic Rate</h3>
+            <canvas id="rmr" class="col-sm-12"></canvas>
+            <br>
+        </div>
+        <div class="col-sm-4">
+            <h3>Body Age</h3>
+            <canvas id="bodyage" class="col-sm-12"></canvas>
+            <br>
+        </div>
+<script>
+var labels = [{% for label in labels %}
+                     '{{ label }}',
+              {% endfor %}];
+var weight = [{% for value in weight %}
+                 {{ value }},
+             {% endfor %}];
+var bmi = [{% for value in bmi %}
+                 {{ value }},
+             {% endfor %}];
+var bfp = [{% for value in bfp %}
+                 {{ value }},
+             {% endfor %}];
+var muscle = [{% for value in muscle %}
+                 {{ value }},
+             {% endfor %}];
+var visceral = [{% for value in visceral %}
+                 {{ value }},
+             {% endfor %}];
+var rmr = [{% for value in rmr %}
+                 {{ value }},
+             {% endfor %}];
+var bodyage = [{% for value in bodyage %}
+                 {{ value }},
+             {% endfor %}];
+var options = {
+    legend: {
+        display: false
+    },
+    scales: {
+        xAxes: [{
+            type: 'time',
+            time: {
+                displayFormats: {
+      	        'millisecond': 'MMM DD',
+                    'second': 'MMM DD',
+                    'minute': 'MMM DD',
+                    'hour': 'MMM DD',
+                    'day': 'MMM DD',
+                    'week': 'MMM DD',
+                    'month': 'MMM DD',
+                    'quarter': 'MMM DD',
+                    'year': 'MMM DD'
+                }
+            }
+        }]
+    }
+};
+var ctx_weight = document.getElementById('weight').getContext('2d');
+var chart_weight = new Chart(ctx_weight, {type: 'line',
+                                          data: {
+                                              labels: labels,
+                                              datasets: [{
+                                                  label: "Weight",
+                                                  data: weight,
+                                                  backgroundColor: "rgba(151,187,205,0.4)",
+                                                  borderColor: "rgba(151,187,205,1)",
+                                                  lineTension: 0
+                                              }]
+                                          }
+                                          , options});
+var ctx_bmi = document.getElementById('bmi').getContext('2d');
+var chart_bmi = new Chart(ctx_bmi, {type: 'line',
+                                    data: {
+                                        labels: labels,
+                                        datasets: [{
+                                            label: "BMI",
+                                            data: bmi,
+                                            backgroundColor: "rgba(151,187,205,0.4)",
+                                            borderColor: "rgba(151,187,205,1)",
+                                            lineTension: 0
+                                        }]
+                                    },
+                                    options});
+var ctx_bfp = document.getElementById('bfp-muscle').getContext('2d');
+var chart_bfp = new Chart(ctx_bfp, {type: 'line',
+                                    data: {
+                                        labels: labels,
+                                        datasets: [{
+                                            label: "BFP",
+                                            data: bfp,
+                                            backgroundColor: "rgba(151,187,205,0.4)",
+                                            borderColor: "rgba(151,187,205,1)",
+                                            lineTension: 0
+                                        },{
+                                            label: "Skeletal Muscle",
+                                            data: muscle,
+                                            backgroundColor: "rgba(255,153,0,0.4)",
+                                            borderColor: "rgba(255,153,0,1)",
+                                            lineTension: 0
+                                        }]
+                                    },
+                                    options});
+var ctx_visceral = document.getElementById('visceral').getContext('2d');
+var chart_visceral = new Chart(ctx_visceral, {type: 'line',
+                                    data: {
+                                        labels: labels,
+                                        datasets: [{
+                                            label: "Visceral Fat",
+                                            data: visceral,
+                                            backgroundColor: "rgba(151,187,205,0.4)",
+                                            borderColor: "rgba(151,187,205,1)",
+                                            lineTension: 0
+                                        }]
+                                    },
+                                    options});
+var ctx_rmr = document.getElementById('rmr').getContext('2d');
+var chart_rmr = new Chart(ctx_rmr, {type: 'line',
+                                    data: {
+                                        labels: labels,
+                                        datasets: [{
+                                            label: "RMR",
+                                            data: rmr,
+                                            backgroundColor: "rgba(151,187,205,0.4)",
+                                            borderColor: "rgba(151,187,205,1)",
+                                            lineTension: 0
+                                        }]
+                                    },
+                                    options});
+var ctx_bodyage = document.getElementById('bodyage').getContext('2d');
+var chart_bodyage = new Chart(ctx_bodyage, {type: 'line',
+                                    data: {
+                                        labels: labels,
+                                        datasets: [{
+                                            label: "Body Age",
+                                            data: bodyage,
+                                            backgroundColor: "rgba(151,187,205,0.4)",
+                                            borderColor: "rgba(151,187,205,1)",
+                                            lineTension: 0
+                                        }]
+                                    },
+                                    options});
+</script>
+{% endblock %}
