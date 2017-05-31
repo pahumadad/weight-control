@@ -26,6 +26,7 @@
                         <li><a href="{{ url_for('index') }}">Home</a></li>
                         {% if g.user.get_last_control() %}
                         <li><a href="{{ url_for('controls', nickname=g.user.nickname) }}">Controls</a></li>
+                        <li><a href="{{ url_for('charts', nickname=g.user.nickname) }}">Charts</a></li>
                         {% endif %}
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
