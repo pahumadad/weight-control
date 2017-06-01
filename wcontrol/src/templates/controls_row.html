@@ -1,7 +1,7 @@
 <tr>
     <td>{{ momentjs(controls.date).format("MMM Do, YY") }}</td>
     {% for i in user.get_measurements_index() %}
-        <td>{{ controls[i][1] }}</td>
+        <td>{{ controls[i][0] }}</td>
     {% endfor %}
     <td style="width:70px">
         <a href="{{ url_for('control_edit', nickname=g.user.nickname, id=controls.id) }}">
