@@ -120,19 +120,19 @@ class Control(db.Model):
 
     def __getitem__(self, index):
         if index == 0:
-            return [self.__table__.columns.keys()[3], self.weight]
+            return [self.weight, MEASUREMENTS[0][1], MEASUREMENTS[0][2]]
         if index == 1:
-            return [self.__table__.columns.keys()[4], self.bmi]
+            return [self.bmi, MEASUREMENTS[1][1], MEASUREMENTS[1][2]]
         if index == 2:
-            return [self.__table__.columns.keys()[5], self.fat]
+            return [self.fat, MEASUREMENTS[2][1], MEASUREMENTS[2][2]]
         if index == 3:
-            return [self.__table__.columns.keys()[6], self.muscle]
+            return [self.muscle, MEASUREMENTS[3][1], MEASUREMENTS[3][2]]
         if index == 4:
-            return [self.__table__.columns.keys()[7], self.visceral]
+            return [self.visceral, MEASUREMENTS[4][1], MEASUREMENTS[4][2]]
         if index == 5:
-            return [self.__table__.columns.keys()[8], self.rmr]
+            return [self.rmr, MEASUREMENTS[5][1], MEASUREMENTS[5][2]]
         if index == 6:
-            return [self.__table__.columns.keys()[9], self.bodyage]
+            return [self.bodyage, MEASUREMENTS[6][1], MEASUREMENTS[6][2]]
 
     def set_attribute(self, attr, value):
         self.__setattr__(attr, value)

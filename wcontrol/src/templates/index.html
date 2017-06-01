@@ -8,113 +8,29 @@
         <h2>Last Control</h2>
         <br>
         {% if not control %}
-        <p>You don't have any control yet.</p>
+            <p>You don't have any control yet.</p>
         {% else %}
-        <p>Control Date:
+            <p>Control Date:
                 <strong>
                     {{ momentjs(control.date).format("MMMM Do, YYYY") }}
                 </strong>
                 ({{ momentjs(control.date).fromNow() }})
-        </p>
-        <br>
-        {% if control.weight != 0.0 %}
-        <div class"col-sm-12">
-            <p>Weight: <strong>{{ control.weight }}</strong>&nbsp;
-                <a href="#weight_desc" data-toggle="collapse">
-                    <span class="glyphicon glyphicon-question-sign"></span>
-                </a>
             </p>
-        </div>
-        <div id="weight_desc" class="collapse col-sm-12">
-            <div class="col-sm-offset-1 col-sm-10">
-                {% include 'weight_desc.html' %}
-            </div>
-        </div>
-        {% endif %}
-        {% if control.bmi != 0.0 %}
-        <div class"col-sm-12">
-            <p>Body Mass Index (BMI): <strong>{{ control.bmi }}</strong> - {{ result.bmi }}&nbsp;
-                <a href="#bmi_desc" data-toggle="collapse">
-                    <span class="glyphicon glyphicon-question-sign"></span>
-                </a>
-            </p>
-        </div>
-        <div id="bmi_desc" class="collapse col-sm-12">
-            <div class="col-sm-offset-1 col-sm-10">
-                {% include 'bmi_desc.html' %}
-            </div>
-        </div>
-        {% endif %}
-        {% if control.fat != 0.0 %}
-        <div class"col-sm-12">
-            <p>Body Fat Percentage (BFP): <strong>{{ control.fat }}</strong> - {{ result.fat }}&nbsp;
-                <a href="#fat_desc" data-toggle="collapse">
-                    <span class="glyphicon glyphicon-question-sign"></span>
-                </a>
-            </p>
-        </div>
-        <div id="fat_desc" class="collapse col-sm-12">
-            <div class="col-sm-offset-1 col-sm-10">
-                {% include 'fat_desc.html' %}
-            </div>
-        </div>
-        {% endif %}
-        {% if control.muscle != 0.0 %}
-        <div class"col-sm-12">
-            <p>Skeletal Muscle: <strong>{{ control.muscle }}</strong> - {{ result.muscle }}&nbsp;
-                <a href="#muscle_desc" data-toggle="collapse">
-                    <span class="glyphicon glyphicon-question-sign"></span>
-                </a>
-            </p>
-        </div>
-        <div id="muscle_desc" class="collapse col-sm-12">
-            <div class="col-sm-offset-1 col-sm-10">
-                {% include 'muscle_desc.html' %}
-            </div>
-        </div>
-        {% endif %}
-        {% if control.visceral != 0.0 %}
-        <div class"col-sm-12">
-            <p>Visceral Fat: <strong>{{ control.visceral }}</strong> - {{ result.visceral }}&nbsp;
-                <a href="#visceral_desc" data-toggle="collapse">
-                    <span class="glyphicon glyphicon-question-sign"></span>
-                </a>
-            </p>
-        </div>
-        <div id="visceral_desc" class="collapse col-sm-12">
-            <div class="col-sm-offset-1 col-sm-10">
-                {% include 'visceral_desc.html' %}
-            </div>
-        </div>
-        {% endif %}
-        {% if control.rmr != 0.0 %}
-        <div class"col-sm-12">
-            <p>Resting Metabolic Rate (RMR): <strong>{{ control.rmr }}</strong>&nbsp;
-                <a href="#rmr_desc" data-toggle="collapse">
-                    <span class="glyphicon glyphicon-question-sign"></span>
-                </a>
-            </p>
-        </div>
-        <div id="rmr_desc" class="collapse col-sm-12">
-            <div class="col-sm-offset-1 col-sm-10">
-                {% include 'rmr_desc.html' %}
-            </div>
-        </div>
-        {% endif %}
-        {% if control.bodyage != 0.0 %}
-        <div class"col-sm-12">
-            <p>Body Age: <strong>{{ control.bodyage }}</strong>&nbsp;
-                <a href="#bodyage_desc" data-toggle="collapse">
-                    <span class="glyphicon glyphicon-question-sign"></span>
-                </a>
-            </p>
-        </div>
-        <div id="bodyage_desc" class="collapse col-sm-12">
-            <div class="col-sm-offset-1 col-sm-10">
-                {% include 'bodyage_desc.html' %}
-            </div>
-        </div>
-        {% endif %}
+            <br>
+            {% for i in user.get_measurements_index() %}
+                <div class"col-sm-12">
+                    <p>{{ control[i][2] }}: <strong>{{ control[i][0] }}</strong> - {{ result[i] }}
+                        <a href="#{{ control[i][1] }}_desc" data-toggle="collapse">
+                            <span class="glyphicon glyphicon-question-sign"></span>
+                        </a>
+                    </p>
+                </div>
+                <div id="{{ control[i][1] }}_desc" class="collapse col-sm-12">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        {% include control[i][1] + '_desc.html' %}
+                    </div>
+                </div>
+            {% endfor %}
         {% endif %}
         <div class="col-sm-12">
             <div class="col-sm-offset-3 col-sm-6">

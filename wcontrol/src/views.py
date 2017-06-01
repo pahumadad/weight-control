@@ -218,7 +218,7 @@ def control_edit(nickname, id):
         for m in form.measurements:
             for x, y, z in MEASUREMENTS:
                 if m.form.value.label == z:
-                    m.form.value.data = control[x][1]
+                    m.form.value.data = control[x][0]
     return render_template('edit_control.html',
                            title="Edit Control",
                            form=form)
