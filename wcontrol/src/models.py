@@ -145,6 +145,8 @@ class Control(db.Model):
             return [self.rmr, MEASUREMENTS[5][1], MEASUREMENTS[5][2]]
         if index == 6:
             return [self.bodyage, MEASUREMENTS[6][1], MEASUREMENTS[6][2]]
+        if index == 7:
+            return [self.date, '', '']
 
     def set_attribute(self, attr, value):
         self.__setattr__(attr, value)
