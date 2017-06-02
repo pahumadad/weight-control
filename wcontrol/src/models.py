@@ -97,6 +97,18 @@ class User(UserMixin, db.Model):
         return Control.query.filter(Control.user_id == self.id)\
                       .order_by(Control.date.desc(), Control.id.desc())
 
+    def get_controls_dict(self):
+        controls = Control.query.filter(Control.user_id == self.id)\
+                          .order_by(Control.date.asc(), Control.id.asc())
+        controls_dict = OrderedDict()
+        aux = 0
+        for control in controls:
+            controls_dict.update({aux: OrderedDict()})
+            for j in range(7):
+                controls_dict[aux].update({j: control[j][0]})
+            aux += 1
+        return controls_dict
+
     def get_last_control(self):
         return Control.query.filter(Control.user_id == self.id)\
                       .order_by(Control.date.desc(), Control.id.desc()).first()
