@@ -5,52 +5,82 @@
     <h1>{{ user.name }}</h1>
     {% include 'flash.html' %}
     <div class="well">
-        <h2>Last Control</h2>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-4">
+                    <h2>Last Control</h2>
+                </div>
+                <div class="col-sm-8">
+                    <br>
+                    <a href="{{ url_for('add', nickname=user.nickname) }}">
+                        <button type="button" class="btn btn-primary">New Control</button>
+                    </a>
+                </div>
+            </div>
+        </div>
         <br>
         {% if not control %}
             <p>You don't have any control yet.</p>
         {% else %}
-            <p>Control Date:
-                <strong>
-                    {{ momentjs(control.date).format("MMMM Do, YYYY") }}
-                </strong>
-                ({{ momentjs(control.date).fromNow() }})
-            </p>
-            <br>
-            {% for i in user.get_measurements_index() %}
-                <div class"col-sm-12">
-                    <p>{{ control[i][2] }}: <strong>{{ control[i][0] }}</strong> - {{ result[i] }}
-                        <a href="#modal_{{ control[i][1] }}_desc" data-toggle="modal">
-                            <span class="glyphicon glyphicon-question-sign"></span>
-                        </a>
-                    </p>
-                </div>
-                <div id="modal_{{ control[i][1] }}_desc" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">{{ control[i][2] }}</h4>
-                            </div>
-                            <div class="modal-body">
-                                {% include control[i][1] + '_desc.html' %}
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <p>Control Date:
+                            <strong>
+                                {{ momentjs(control.date).format("MMMM Do, YYYY") }}
+                            </strong>
+                            ({{ momentjs(control.date).fromNow() }})
+                        </p>
                     </div>
                 </div>
-            {% endfor %}
-        {% endif %}
-        <div class="col-sm-12">
-            <div class="col-sm-offset-3 col-sm-6">
-                <hr>
             </div>
-        </div>
-        <a href="{{ url_for('add', nickname=user.nickname) }}">
-            <button type="button" class="btn btn-primary">New Control</button>
-        </a>
+            <br>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <table class="table table-striped">
+                        {% for i in user.get_measurements_index() %}
+                            <tr>
+                                <td>
+                                    <p>{{ control[i][2] }}&nbsp;
+                                        <a href="#modal_{{ control[i][1] }}_desc" data-toggle="modal">
+                                            <span class="glyphicon glyphicon-question-sign"></span>
+                                        </a>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p><strong>{{ control[i][0] }}</strong></p>
+                                </td>
+                                <td>
+                                    <p>{{ result[i] }}</p>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    </div>
+                    {% for i in user.get_measurements_index() %}
+                        <div id="modal_{{ control[i][1] }}_desc" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">{{ control[i][2] }}</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        {% include control[i][1] + '_desc.html' %}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="col-sm-6">
+                    </div>
+                </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 
