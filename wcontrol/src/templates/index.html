@@ -20,14 +20,25 @@
             {% for i in user.get_measurements_index() %}
                 <div class"col-sm-12">
                     <p>{{ control[i][2] }}: <strong>{{ control[i][0] }}</strong> - {{ result[i] }}
-                        <a href="#{{ control[i][1] }}_desc" data-toggle="collapse">
+                        <a href="#modal_{{ control[i][1] }}_desc" data-toggle="modal">
                             <span class="glyphicon glyphicon-question-sign"></span>
                         </a>
                     </p>
                 </div>
-                <div id="{{ control[i][1] }}_desc" class="collapse col-sm-12">
-                    <div class="col-sm-offset-1 col-sm-10">
-                        {% include control[i][1] + '_desc.html' %}
+                <div id="modal_{{ control[i][1] }}_desc" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">{{ control[i][2] }}</h4>
+                            </div>
+                            <div class="modal-body">
+                                {% include control[i][1] + '_desc.html' %}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             {% endfor %}
