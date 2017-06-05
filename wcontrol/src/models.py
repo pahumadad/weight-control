@@ -97,6 +97,28 @@ class User(UserMixin, db.Model):
         return Control.query.filter(Control.user_id == self.id)\
                       .order_by(Control.date.desc(), Control.id.desc())
 
+    def get_controls_dict(self):
+        controls = Control.query.filter(Control.user_id == self.id)\
+                          .order_by(Control.date.asc(), Control.id.asc())
+        controls_dict = OrderedDict()
+        aux = 0
+        for control in controls:
+            controls_dict.update({aux: OrderedDict()})
+            for j in range(7):
+                controls_dict[aux].update({j: control[j][0]})
+            aux += 1
+        return controls_dict
+
+    def get_controls_date_dict(self):
+        controls = Control.query.filter(Control.user_id == self.id)\
+                          .order_by(Control.date.asc(), Control.id.asc())
+        dates_dict = OrderedDict()
+        aux = 0
+        for control in controls:
+            dates_dict.update({aux: control[7][0]})
+            aux += 1
+        return dates_dict
+
     def get_last_control(self):
         return Control.query.filter(Control.user_id == self.id)\
                       .order_by(Control.date.desc(), Control.id.desc()).first()
@@ -133,6 +155,8 @@ class Control(db.Model):
             return [self.rmr, MEASUREMENTS[5][1], MEASUREMENTS[5][2]]
         if index == 6:
             return [self.bodyage, MEASUREMENTS[6][1], MEASUREMENTS[6][2]]
+        if index == 7:
+            return [self.date, '', '']
 
     def set_attribute(self, attr, value):
         self.__setattr__(attr, value)
