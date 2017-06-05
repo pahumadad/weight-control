@@ -77,13 +77,29 @@
                         </div>
                     {% endfor %}
                     <div class="col-sm-6">
-                        <div class="form-group col-sm-6">
+                        <form class="form-inline">
+                            <div class="col-sm-12">
                             <select class="form-control" id="chart_measurement">
                                 {% for i in user.get_measurements_index() %}
                                     <option id={{ i }}>{{ control[i][2] }}</option>
                                 {% endfor %}
                             </select>
-                        </div>
+                            <button class="btn btn-default" id="chart_left">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </button>
+                            <select class="form-control" id="chart_cant">
+                                <option id=6>6</option>
+                                <option id=9>9</option>
+                                <option id=12>12</option>
+                                <option id=18>18</option>
+                                <option id=24>24</option>
+                            </select>
+                            <button class="btn btn-default" id="chart_right">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </button>
+                            </div>
+                        </form>
+                        <br><br><br>
                         <canvas id="chart" class="col-sm-12"></canvas>
                     </div>
                 </div>
