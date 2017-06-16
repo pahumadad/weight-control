@@ -12,11 +12,15 @@ class results(object):
         self.bodyage = ''
 
     def get_bmi(self, bmi):
+        if not bmi:
+            return '-'
         for limit, msg in BMI:
             if bmi <= limit:
                 return msg
 
     def get_fat(self, fat, gender):
+        if not fat:
+            return '-'
         for limit_w, limit_m, msg in BFP:
             if gender == 'Female' and fat <= limit_w:
                 return msg
@@ -24,6 +28,8 @@ class results(object):
                 return msg
 
     def get_muscle(self, muscle, gender):
+        if not muscle:
+            return '-'
         for limit_w, limit_m, msg in MUSCLE:
             if gender == 'Female' and muscle <= limit_w:
                 return msg
@@ -31,6 +37,8 @@ class results(object):
                 return msg
 
     def get_visceral(self, visceral):
+        if not visceral:
+            return '-'
         for limit, msg in VISCERAL:
             if visceral <= limit:
                 return msg

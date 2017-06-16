@@ -129,32 +129,39 @@ class Control(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     date = db.Column(db.DateTime)
-    weight = db.Column(db.Float(Precision=2), default=0)
-    bmi = db.Column(db.Float(Precision=2), default=0)
-    fat = db.Column(db.Float(Precision=2), default=0)
-    muscle = db.Column(db.Float(Precision=2), default=0)
-    visceral = db.Column(db.Float(Precision=2), default=0)
-    rmr = db.Column(db.Float(Precision=2), default=0)
-    bodyage = db.Column(db.Float(Precision=2), default=0)
+    weight = db.Column(db.Float(Precision=2))
+    bmi = db.Column(db.Float(Precision=2))
+    fat = db.Column(db.Float(Precision=2))
+    muscle = db.Column(db.Float(Precision=2))
+    visceral = db.Column(db.Float(Precision=2))
+    rmr = db.Column(db.Float(Precision=2))
+    bodyage = db.Column(db.Float(Precision=2))
 
     def __repr__(self):
         return '<Control %r>' % (self.id)
 
     def __getitem__(self, index):
         if index == 0:
-            return [self.weight, MEASUREMENTS[0][1], MEASUREMENTS[0][2]]
+            return [self.weight if self.weight else '-',
+                    MEASUREMENTS[0][1], MEASUREMENTS[0][2]]
         if index == 1:
-            return [self.bmi, MEASUREMENTS[1][1], MEASUREMENTS[1][2]]
+            return [self.bmi if self.bmi else '-',
+                    MEASUREMENTS[1][1], MEASUREMENTS[1][2]]
         if index == 2:
-            return [self.fat, MEASUREMENTS[2][1], MEASUREMENTS[2][2]]
+            return [self.fat if self.fat else '-',
+                    MEASUREMENTS[2][1], MEASUREMENTS[2][2]]
         if index == 3:
-            return [self.muscle, MEASUREMENTS[3][1], MEASUREMENTS[3][2]]
+            return [self.muscle if self.muscle else '-',
+                    MEASUREMENTS[3][1], MEASUREMENTS[3][2]]
         if index == 4:
-            return [self.visceral, MEASUREMENTS[4][1], MEASUREMENTS[4][2]]
+            return [self.visceral if self.visceral else '-',
+                    MEASUREMENTS[4][1], MEASUREMENTS[4][2]]
         if index == 5:
-            return [self.rmr, MEASUREMENTS[5][1], MEASUREMENTS[5][2]]
+            return [self.rmr if self.rmr else '-',
+                    MEASUREMENTS[5][1], MEASUREMENTS[5][2]]
         if index == 6:
-            return [self.bodyage, MEASUREMENTS[6][1], MEASUREMENTS[6][2]]
+            return [self.bodyage if self.bodyage else '-',
+                    MEASUREMENTS[6][1], MEASUREMENTS[6][2]]
         if index == 7:
             return [self.date, '', '']
 
