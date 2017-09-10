@@ -1,6 +1,5 @@
 #!/bin/bash
 
-source env/bin/activate
 export FLASK_APP=$(pwd)/wcontrol/src/main.py
 export WCONTROL_CONF=wcontrol.conf.config
 
